@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 # Constants
+
 class CommunityType(models.TextChoices):
 	''' specifies the types of communities '''
 	BAR = 'BAR', _('Bar')
@@ -16,7 +17,8 @@ class CommunityType(models.TextChoices):
 # 	BAR = 'BAR', _('Bar')
 # 	BAR = 'BAR', _('Bar')
 
-# Create your models here.
+# Create your models here
+
 class Profile(models.Model):
 	''' user profile to hold extra data from django's default User class '''
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')

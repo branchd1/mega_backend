@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Profile, Community, Feature, Database
+
+# Register your models here
+
+admin.register(Profile)
+admin.register(Community)
+admin.register(Feature)
+admin.register(Database)
