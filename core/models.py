@@ -17,7 +17,7 @@ class CommunityType(models.TextChoices):
 # 	BAR = 'BAR', _('Bar')
 # 	BAR = 'BAR', _('Bar')
 
-# Create your models here
+# Models
 
 class Profile(models.Model):
 	''' user profile to hold extra data from django's default User class '''
