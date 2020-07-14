@@ -8,23 +8,23 @@ from django.utils.translation import gettext_lazy as _
 class CommunityType(models.TextChoices):
 	''' specifies the types of communities '''
 	BAR = 'BAR', _('Bar')
-	BAR = 'BAR', _('Bar')
-	BAR = 'BAR', _('Bar')
-	BAR = 'BAR', _('Bar')
-	BAR = 'BAR', _('Bar')
-	BAR = 'BAR', _('Bar')
-	BAR = 'BAR', _('Bar')
-	BAR = 'BAR', _('Bar')
+# 	BAR = 'BAR', _('Bar')
+# 	BAR = 'BAR', _('Bar')
+# 	BAR = 'BAR', _('Bar')
+# 	BAR = 'BAR', _('Bar')
+# 	BAR = 'BAR', _('Bar')
+# 	BAR = 'BAR', _('Bar')
+# 	BAR = 'BAR', _('Bar')
 
 # Create your models here.
 class Profile(models.Model):
 	''' user profile to hold extra data from django's default User class '''
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 	picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
-	phone_number = models.IntegerField(max_length=20, null=True, blank=True)
+	phone_number = models.CharField(max_length=16, null=True, blank=True)
 	
 	def __str__(self):
-		return self.user.username + '\'s profile'
+		return self.user.username + _('\'s profile')
 	
 class Feature(models.Model):
 	''' features built by 3rd party developers '''
@@ -45,10 +45,10 @@ class Database(models.Model):
 	db_name = models.CharField(max_length=32)
 	db_pass = models.CharField(max_length=32)
 	db_host = models.CharField(max_length=32)
-	db_port = models.IntegerField(max_length=5)
+	db_port = models.IntegerField()
 	
 	def __str__(self):
-		return self.feature.name + '\'s database'
+		return self.feature.name + _('\'s database')
 	
 
 class Community(models.Model):
@@ -61,8 +61,8 @@ class Community(models.Model):
 	is_public = models.BooleanField()
 	key = models.CharField(max_length=16)
 	
-	admins = models.ManyToManyField(User)
-	members = models.ManyToManyField(User)
+	admins = models.ManyToManyField(User, related_name='communities_admined')
+	members = models.ManyToManyField(User, related_name='communities_joined')
 	
 	features = models.ManyToManyField(Feature)
 	
