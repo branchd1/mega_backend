@@ -68,5 +68,8 @@ class Community(models.Model):
 	
 	features = models.ManyToManyField(Feature)
 	
+	class Meta:
+		verbose_name_plural = "communities"
+	
 	def __str__(self):
 		return self.name

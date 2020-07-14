@@ -4,7 +4,7 @@ from .models import Profile, Community, Feature, Database
 
 # Register your models here
 
-admin.register(Profile)
-admin.register(Community)
-admin.register(Feature)
-admin.register(Database)
+admin.site.register(Profile)
+admin.site.register(Community)
+admin.site.register(Feature)
+admin.site.register(Database)
