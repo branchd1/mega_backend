@@ -6,11 +6,6 @@ from . import serializers as my_serializers
 
 # Views here
 
-class UserViewSet(viewsets.ModelViewSet):
-	''' user view set '''
-	serializer_class = my_serializers.UserSerializer
-	permission_classes = []
-
 class ProfileViewSet(viewsets.ModelViewSet):
 	''' profile view set '''
 	serializer_class = my_serializers.ProfileSerializer

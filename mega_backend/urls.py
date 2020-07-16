@@ -12,7 +12,6 @@ from core import views
 # DRF router configuration
 
 api_router = routers.DefaultRouter()
-api_router.register(r'users', views.CommunityViewSet, basename='user')
 api_router.register(r'profiles', views.ProfileViewSet, basename='profile')
 api_router.register(r'features', views.FeatureViewSet, basename='feature')
 api_router.register(r'databses', views.DatabaseViewSet, basename='database')
@@ -23,4 +22,5 @@ api_router.register(r'communities', views.CommunityViewSet, basename='community'
 urlpatterns = [
 	path('api/', include(api_router.urls)),
     path('admin/', admin.site.urls),
+    path('auth/', include('djoser.urls')),
 ]
