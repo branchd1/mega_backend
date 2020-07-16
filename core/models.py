@@ -9,13 +9,16 @@ from django.utils.translation import gettext_lazy as _
 class CommunityType(models.TextChoices):
 	''' specifies the types of communities '''
 	BAR = 'BAR', _('Bar')
-# 	BAR = 'BAR', _('Bar')
-# 	BAR = 'BAR', _('Bar')
-# 	BAR = 'BAR', _('Bar')
-# 	BAR = 'BAR', _('Bar')
-# 	BAR = 'BAR', _('Bar')
-# 	BAR = 'BAR', _('Bar')
-# 	BAR = 'BAR', _('Bar')
+	RESTAURANT = 'RES', _('Restaurant')
+	CLUB = 'CLB', _('Club')
+	RELIGIOUS_INSTITUTION = 'REI', _('Religious Institution')
+	OFFICE = 'OFF', _('Office')
+	SUPERMARKET = 'SMT', _('Supermarket')
+	CINEMA = 'CNA', _('Cinema')
+	HOSPITAL = 'HOS', _('Hospital')
+	HOTEL = 'HTL', _('Hotel')
+	RETAIL_STORE = 'RSE', _('Retail Store')
+	ESTATE = 'EST', _('Estate')
 
 # Models
 
