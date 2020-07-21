@@ -4,14 +4,17 @@ from rest_framework import viewsets
 
 from . import serializers as my_serializers
 
+from .permissions import IsOwner
+
 # Views here
 
 class ProfileViewSet(viewsets.ModelViewSet):
 	''' profile view set '''
 	serializer_class = my_serializers.ProfileSerializer
-	permission_classes = []
+	permission_classes = [IsOwner]
 	
 	def get_queryset(self):
+		''' return the current user profile only '''
 		return self.request.user.profile.all()
 		
 class FeatureViewSet(viewsets.ModelViewSet):

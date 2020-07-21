@@ -63,9 +63,13 @@ class Community(models.Model):
 	picture = models.ImageField(upload_to='community_pictures/', null=True, blank=True)
 	description = models.TextField()
 	
+	# determines if the community can be joined by anyone or only by people with the key
 	is_public = models.BooleanField()
+	
+	# used to join the community if it is not public
 	key = models.CharField(max_length=16)
 	
+	# django automatically creates the relationship model for many-to-many fields
 	admins = models.ManyToManyField(User, related_name='communities_admined')
 	members = models.ManyToManyField(User, related_name='communities_joined')
 	
@@ -73,6 +77,27 @@ class Community(models.Model):
 	
 	class Meta:
 		verbose_name_plural = "communities"
+		
+	def get_random_key(self):
+		''' generate a random key '''
+		_key = User.objects.make_random_password(length=10, allowed_chars="abcdefghjkmnpqrstuvwxyz01234567889")
+		
+		# check if the key already exists in another community and generate another
+		if Community.objects.filter(key=_key).exists():
+			return self.get_random_key()
+			
+		return _key
+		
+	def save(self, *args, **kwargs):
+		''' override the default save function '''
+		
+		# check if the object is being created
+		if not self.id:
+			# assign the key
+			self.key = self.get_random_key()
+			
+		# call the parent save
+		super(Community, self).save(*args, **kwargs)
 	
 	def __str__(self):
 		return self.name
