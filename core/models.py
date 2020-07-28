@@ -11,14 +11,18 @@ class CommunityType(models.TextChoices):
 	BAR = 'BAR', _('Bar')
 	RESTAURANT = 'RES', _('Restaurant')
 	CLUB = 'CLB', _('Club')
-	RELIGIOUS_INSTITUTION = 'REI', _('Religious Institution')
+	RELIGIOUS_INSTITUTION = 'REI', _('Religious institution')
 	OFFICE = 'OFF', _('Office')
 	SUPERMARKET = 'SMT', _('Supermarket')
 	CINEMA = 'CNA', _('Cinema')
 	HOSPITAL = 'HOS', _('Hospital')
 	HOTEL = 'HTL', _('Hotel')
-	RETAIL_STORE = 'RSE', _('Retail Store')
+	RETAIL_STORE = 'RSE', _('Retail store')
 	ESTATE = 'EST', _('Estate')
+	PRO_SERVICES = 'PRS', _('Professional services')
+	E_COM = 'ECO', _('eCommerce')
+	SCHOOL = 'SCH', _('School')
+	ENTERTAINMENT = 'ENT', _('Entertainment')
 
 # Models
 
