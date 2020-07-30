@@ -2,9 +2,13 @@ from django.shortcuts import render
 
 from rest_framework import viewsets
 
-from . import serializers as my_serializers
+from core import serializers as my_serializers
 
-from .permissions import IsOwner
+from core.permissions import IsOwner
+
+from django.contrib.auth.models import User
+
+from django.http import JsonResponse
 
 # Views here
 
@@ -31,4 +35,19 @@ class CommunityViewSet(viewsets.ModelViewSet):
 	''' community view set '''
 	serializer_class = my_serializers.CommunitySerializer
 	permission_classes = []
+	
+def check_email(request):
+	''' checks if an email exists '''
+	email = request.POST.get('email')
+	if email and User.objects.filter(email=email).exists():
+		_response_dict = {
+			'exists': True
+		}
+		return JsonResponse(_response_dict)
+	else:
+		_response_dict = {
+			'email': 'Enter an email address'
+		}
+		return JsonResponse(_response_dict, status=400)
+			
 	
