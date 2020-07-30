@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from django.contrib.auth.models import User
@@ -12,3 +12,8 @@ def create_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+    
+@receiver(pre_save, sender=User)
+def save_username(sender, instance, **kwargs):
+	if instance.username is None:
+		instance.username = instance.email
