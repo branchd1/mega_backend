@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 
 from django.http import JsonResponse
 
+from django.views.decorators.csrf import csrf_exempt
+
 # Views here
 
 class ProfileViewSet(viewsets.ModelViewSet):
@@ -36,6 +38,7 @@ class CommunityViewSet(viewsets.ModelViewSet):
 	serializer_class = my_serializers.CommunitySerializer
 	permission_classes = []
 	
+@csrf_exempt
 def check_email(request):
 	''' checks if an email exists '''
 	email = request.POST.get('email')
