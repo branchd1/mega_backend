@@ -33,7 +33,7 @@ class Profile(models.Model):
 	phone_number = models.CharField(max_length=16, null=True, blank=True)
 	
 	def __str__(self):
-		return self.user.username + _('\'s profile')
+		return self.user.username + '\'s profile'
 	
 class Feature(models.Model):
 	''' features built by 3rd party developers '''
@@ -57,7 +57,7 @@ class Database(models.Model):
 	db_port = models.IntegerField()
 	
 	def __str__(self):
-		return self.feature.name + _('\'s database')
+		return self.feature.name + '\'s database'
 	
 
 class Community(models.Model):
