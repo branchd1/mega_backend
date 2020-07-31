@@ -42,10 +42,19 @@ class CommunityViewSet(viewsets.ModelViewSet):
 def check_email(request):
 	''' checks if an email exists '''
 	email = request.POST.get('email')
-	if email and User.objects.filter(email=email).exists():
-		_response_dict = {
-			'exists': True
-		}
+	print(request.POST)
+	if email:
+		_response_dict = None
+		if User.objects.filter(email=email).exists():
+			# email has been used
+			_response_dict = {
+				'exists': True
+			}
+		else:
+			# email has not been used
+			_response_dict = {
+				'exists': False
+			}
 		return JsonResponse(_response_dict)
 	else:
 		_response_dict = {
