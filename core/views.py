@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
-from rest_framework import viewsets
+from rest_framework import viewsets, views
+
+from rest_framework.response import Response
 
 from core import serializers as my_serializers
 
@@ -9,8 +11,6 @@ from core.permissions import IsOwner
 from django.contrib.auth.models import User
 
 from django.http import JsonResponse
-
-from django.views.decorators.csrf import csrf_exempt
 
 # Views here
 
@@ -38,28 +38,28 @@ class CommunityViewSet(viewsets.ModelViewSet):
 	serializer_class = my_serializers.CommunitySerializer
 	permission_classes = []
 	
-@csrf_exempt
-def check_email(request):
+class CheckEmail(views.APIView):
 	''' checks if an email exists '''
-	email = request.POST.get('email')
-	print(request.POST)
-	if email:
-		_response_dict = None
-		if User.objects.filter(email=email).exists():
-			# email has been used
-			_response_dict = {
-				'exists': True
-			}
+	def post(self, request):
+		email = request.data.get('email')
+		print(request.data)
+		if email:
+			_response_dict = None
+			if User.objects.filter(email=email).exists():
+				# email has been used
+				_response_dict = {
+					'exists': True
+				}
+			else:
+				# email has not been used
+				_response_dict = {
+					'exists': False
+				}
+			return Response(_response_dict)
 		else:
-			# email has not been used
 			_response_dict = {
-				'exists': False
+				'email': 'Enter an email address'
 			}
-		return JsonResponse(_response_dict)
-	else:
-		_response_dict = {
-			'email': 'Enter an email address'
-		}
-		return JsonResponse(_response_dict, status=400)
+			return Response(_response_dict, status=400)
 			
 	

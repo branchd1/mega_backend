@@ -5,5 +5,5 @@ from core import views
 app_name = 'core'
 
 urlpatterns = [
-	path('check_email', views.check_email, name='check_email'),
+	path('check_email', views.CheckEmail.as_view(), name='check_email'),
 ]
