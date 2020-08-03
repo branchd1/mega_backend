@@ -42,6 +42,10 @@ class CommunityViewSet(viewsets.ModelViewSet):
 	serializer_class = my_serializers.CommunitySerializer
 	permission_classes = [IsOwner]
 	
+	def perform_create(self, serializer):
+		community = serializer.save()
+		community.admins.add(self.request.user)
+	
 	def get_queryset(self):
 		''' return current user communities only '''
 		_user = self.request.user
@@ -51,6 +55,8 @@ class CommunityViewSet(viewsets.ModelViewSet):
 		_queryset = list(chain(_queryset1, _queryset2))
 		
 		return _queryset
+		
+	
 	
 class CheckEmail(views.APIView):
 	''' checks if an email exists '''

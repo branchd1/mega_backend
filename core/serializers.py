@@ -27,7 +27,7 @@ class DatabaseSerializer(serializers.ModelSerializer):
 		
 class CommunitySerializer(serializers.ModelSerializer):
 	''' Serialize community '''
-	is_admin = serializers.BooleanField()
+	is_admin = serializers.BooleanField(read_only=True)
 	class Meta:
 		model = my_models.Community
 		read_only_fields = ['id', 'key']
