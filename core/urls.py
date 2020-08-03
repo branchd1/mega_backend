@@ -6,4 +6,5 @@ app_name = 'core'
 
 urlpatterns = [
 	path('check_email/', views.CheckEmail.as_view(), name='check_email'),
+	path('communities/join/', views.JoinCommunity.as_view(), name='join_community'),
 ]

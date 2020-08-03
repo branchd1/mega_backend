@@ -12,11 +12,9 @@ from core.models import Community
 
 from django.contrib.auth.models import User
 
-from django.http import JsonResponse
+from django.db.models import Q, BooleanField, Value
 
-from django.db.models import Q
-
-from django.db.models import BooleanField, Value
+from itertools import chain
 
 # Views here
 
@@ -49,7 +47,9 @@ class CommunityViewSet(viewsets.ModelViewSet):
 		_user = self.request.user
 		_queryset1 = Community.objects.filter(admins__id__contains=_user.pk).distinct().annotate(is_admin=Value(True, output_field=BooleanField()))
 		_queryset2 = Community.objects.filter(members__id__contains=_user.pk).distinct().annotate(is_admin=Value(False, output_field=BooleanField()))
-		_queryset = _queryset1 | _queryset2
+		
+		_queryset = list(chain(_queryset1, _queryset2))
+		
 		return _queryset
 	
 class CheckEmail(views.APIView):
@@ -75,4 +75,25 @@ class CheckEmail(views.APIView):
 			}
 			return Response(_response_dict, status=400)
 			
-	
+class JoinCommunity(views.APIView):
+	''' checks if an email exists '''
+	def post(self, request):
+		_key = request.data.get('key')
+		if _key:
+			_response_dict = None
+			try:
+				_community = Community.objects.get(key=_key)
+			except Community.DoesNotExist:
+				# email has not been used
+				_response_dict = {
+					'key': 'Incorrect key'
+				}
+				return Response(_response_dict, status=400)
+			# email has been used
+			_community.members.add(request.user)
+			return Response({})
+		else:
+			_response_dict = {
+				'key': 'Enter a key'
+			}
+			return Response(_response_dict, status=400)

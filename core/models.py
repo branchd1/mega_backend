@@ -71,7 +71,7 @@ class Community(models.Model):
 	is_public = models.BooleanField()
 	
 	# used to join the community if it is not public
-	key = models.CharField(max_length=16)
+	key = models.CharField(max_length=10)
 	
 	# django automatically creates the relationship model for many-to-many fields
 	admins = models.ManyToManyField(User, related_name='communities_admined', blank=True)
