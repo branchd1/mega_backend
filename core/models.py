@@ -74,13 +74,14 @@ class Community(models.Model):
 	key = models.CharField(max_length=16)
 	
 	# django automatically creates the relationship model for many-to-many fields
-	admins = models.ManyToManyField(User, related_name='communities_admined')
-	members = models.ManyToManyField(User, related_name='communities_joined')
+	admins = models.ManyToManyField(User, related_name='communities_admined', blank=True)
+	members = models.ManyToManyField(User, related_name='communities_joined', blank=True)
 	
-	features = models.ManyToManyField(Feature)
+	features = models.ManyToManyField(Feature, related_name='communities_using', blank=True)
 	
 	class Meta:
-		verbose_name_plural = "communities"
+		verbose_name_plural = 'communities'
+		ordering = ['id']
 		
 	def get_random_key(self):
 		''' generate a random key '''

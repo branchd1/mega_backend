@@ -9,6 +9,9 @@ from django.urls import path, include
 from rest_framework import routers
 from core import views as core_views, urls as core_urls
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 # DRF router configuration
 
 api_router = routers.DefaultRouter()
@@ -25,4 +28,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
