@@ -8,7 +8,7 @@ from core import serializers as my_serializers
 
 from core.permissions import IsOwner
 
-from core.models import Community
+from core.models import Community, Feature
 
 from django.contrib.auth.models import User
 
@@ -35,14 +35,25 @@ class FeatureViewSet(viewsets.ModelViewSet):
 	def get_queryset(self):
 		_user = self.request.user
 		_community_id = self.request.GET.get('community')
-		try:
-			_community = Community.objects.get(id=_community_id)
-		except Community.DoesNotExist:
-			return None
-		if not _community.is_admin_or_member(_user):
-			return None
-		_queryset = _community.features.all()
-		return _queryset
+		_community_type = self.request.GET.get('type')
+		if _community_type:
+			try:
+				_community = Community.objects.get(id=_community_id)
+			except Community.DoesNotExist:
+				return None
+			used_features_id = _community.features.all().values('id')
+			_queryset = Feature.objects.filter(community_type=_community_type).exclude(id__in=used_features_id)
+			return _queryset
+		if _community_id:
+			try:
+				_community = Community.objects.get(id=_community_id)
+			except Community.DoesNotExist:
+				return None
+			if not _community.is_admin_or_member(_user):
+				return None
+			_queryset = _community.features.all()
+			return _queryset
+		return None
 
 class DatabaseViewSet(viewsets.ModelViewSet):
 	''' database view set '''
