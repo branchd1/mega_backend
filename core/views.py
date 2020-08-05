@@ -124,3 +124,41 @@ class JoinCommunity(views.APIView):
 				'key': 'Enter a key'
 			}
 			return Response(_response_dict, status=400)
+
+class AddFeatureToCommunity(views.APIView):
+	''' add a feature to a community '''
+	def post(self, request):
+		_community_id = request.data.get('community')
+		_feature_id = request.data.get('feature')
+
+		if not _community_id:
+			_response_dict = {
+				'community': 'Pick a community'
+			}
+			return Response(_response_dict, status=400)
+
+		if not _feature_id:
+			_response_dict = {
+				'feature': 'Pick a feature'
+			}
+			return Response(_response_dict, status=400)
+
+		try:
+			_feature = Feature.objects.get(id=_feature_id)
+		except Feature.DoesNotExist:
+			_response_dict = {
+				'feature': 'Invalid feature'
+			}
+			return Response(_response_dict, status=400)
+
+		try:
+			_community = Community.objects.get(id=_community_id)
+		except Feature.DoesNotExist:
+			_response_dict = {
+				'community': 'Invalid community'
+			}
+			return Response(_response_dict, status=400)
+
+		_community.features.add(_feature)
+
+		return Response({})
