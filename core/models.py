@@ -68,7 +68,7 @@ class Community(models.Model):
 	description = models.TextField(default='')
 
 	# determines if the community can be joined by anyone or only by people with the key
-	is_public = models.BooleanField(default=False)
+	# is_public = models.BooleanField(default=False)
 
 	# used to join the community if it is not public
 	key = models.CharField(max_length=10)
