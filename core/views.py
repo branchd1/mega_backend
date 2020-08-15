@@ -55,9 +55,19 @@ class FeatureViewSet(viewsets.ModelViewSet):
 			return _queryset
 		return None
 
-class DatabaseViewSet(viewsets.ModelViewSet):
-	''' database view set '''
-	serializer_class = my_serializers.DatabaseSerializer
+class SimpleStoreViewSet(viewsets.ModelViewSet):
+	''' simple store view set '''
+	serializer_class = my_serializers.SimpleStoreSerializer
+	permission_classes = []
+
+class ListStoreViewSet(viewsets.ModelViewSet):
+	''' list store view set '''
+	serializer_class = my_serializers.ListStoreSerializer
+	permission_classes = []
+
+class MapStoreViewSet(viewsets.ModelViewSet):
+	''' map store view set '''
+	serializer_class = my_serializers.MapStoreSerializer
 	permission_classes = []
 
 class CommunityViewSet(viewsets.ModelViewSet):
