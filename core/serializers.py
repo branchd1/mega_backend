@@ -39,6 +39,7 @@ class ListStoreSerializer(serializers.ModelSerializer):
 		model = my_models.ListStore
 		fields = '__all__'
 		read_only_fields = ['id']
+		exclude = ['content_type', 'object_id']
 
 class MapStoreSerializer(serializers.ModelSerializer):
 	''' Serialize map store '''
@@ -46,3 +47,4 @@ class MapStoreSerializer(serializers.ModelSerializer):
 		model = my_models.MapStore
 		fields = '__all__'
 		read_only_fields = ['id']
+		exclude = ['content_type', 'object_id']
