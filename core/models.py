@@ -116,7 +116,7 @@ class SimpleStore(models.Model):
 	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='simple_store')
 
 	key = models.CharField(max_length=128)
-	string_value = models.TextField()
+	value = models.TextField()
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='simple_store')
 	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='simple_store')
