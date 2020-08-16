@@ -172,3 +172,32 @@ class AddFeatureToCommunity(views.APIView):
 		_community.features.add(_feature)
 
 		return Response({})
+
+class DataStore(views.APIView):
+	''' stores data sent '''
+	def get(self, request):
+		pass
+		# _key = request.data.get('key')
+		# if _key:
+		# 	_response_dict = None
+		# 	try:
+		# 		_community = Community.objects.get(key=_key)
+		# 	except Community.DoesNotExist:
+		# 		# email has not been used
+		# 		_response_dict = {
+		# 			'key': 'Incorrect key'
+		# 		}
+		# 		return Response(_response_dict, status=400)
+		# 	# email has been used
+		# 	_community.members.add(request.user)
+		# 	return Response({})
+		# else:
+		# 	_response_dict = {
+		# 		'key': 'Enter a key'
+		# 	}
+		# 	return Response(_response_dict, status=400)
+
+	def post(self, request):
+		_data = request.data
+		print(_data)
+		return Response({})
