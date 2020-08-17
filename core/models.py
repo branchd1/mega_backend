@@ -50,7 +50,31 @@ class Feature(models.Model):
 	community_type = models.CharField(max_length=32, choices=CommunityType.choices)
 	description = models.TextField()
 
+	# used to validate
+	key = models.CharField(max_length=10, unique=True)
+
 	payload = models.TextField()
+
+	def get_random_key(self):
+		''' generate a random key '''
+		_key = User.objects.make_random_password(length=10, allowed_chars="abcdefghjkmnpqrstuvwxyz01234567889")
+
+		# check if the key already exists in another community and generate another
+		if Feature.objects.filter(key=_key).exists():
+			return self.get_random_key()
+
+		return _key
+
+	def save(self, *args, **kwargs):
+		''' override the default save function '''
+
+		# check if the object is being created
+		if not self.id:
+			# assign the key
+			self.key = self.get_random_key()
+
+		# call the parent save
+		super(Feature, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.name
@@ -66,7 +90,7 @@ class Community(models.Model):
 	# is_public = models.BooleanField(default=False)
 
 	# used to join the community if it is not public
-	key = models.CharField(max_length=10)
+	key = models.CharField(max_length=10, unique=True)
 
 	# django automatically creates the relationship model for many-to-many fields
 	admins = models.ManyToManyField(User, related_name='communities_admined', blank=True)
@@ -78,6 +102,7 @@ class Community(models.Model):
 		verbose_name_plural = 'communities'
 		ordering = ['id']
 
+	# used twice. abstract to method?
 	def get_random_key(self):
 		''' generate a random key '''
 		_key = User.objects.make_random_password(length=10, allowed_chars="abcdefghjkmnpqrstuvwxyz01234567889")
@@ -126,42 +151,42 @@ class SimpleStore(models.Model):
 	def __str__(self):
 		return self.feature.name + '\'s simple store'
 
-class ListStore(models.Model):
-	''' list data store for features '''
-	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='list_store')
-
-	# should be unique for each list
-	key = models.CharField(max_length=128)
-	# member = models.ForeignKey(SimpleStore, on_delete=models.CASCADE, related_name='parent_list')
-
-	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-	object_id = models.PositiveIntegerField(null=True, blank=True)
-	member = GenericForeignKey('content_type', 'object_id')
-
-	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='list_store')
-	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='list_store')
-
-	access = models.CharField(max_length=32, choices=DataAccessType.choices)
-
-	def __str__(self):
-		return self.feature.name + '\'s list store'
-
-class MapStore(models.Model):
-	''' simple data store for features '''
-	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='map_store')
-
-	# should be unique for each map
-	key = models.CharField(max_length=128)
-	# member = models.models.ForeignKey(SimpleStore, on_delete=models.CASCADE, related_name='parent_map')
-
-	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-	object_id = models.PositiveIntegerField(null=True, blank=True)
-	member = GenericForeignKey('content_type', 'object_id')
-
-	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='map_store')
-	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='map_store')
-
-	access = models.CharField(max_length=32, choices=DataAccessType.choices)
-
-	def __str__(self):
-		return self.feature.name + '\'s map store'
+# class ListStore(models.Model):
+# 	''' list data store for features '''
+# 	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='list_store')
+#
+# 	# should be unique for each list
+# 	key = models.CharField(max_length=128)
+# 	# member = models.ForeignKey(SimpleStore, on_delete=models.CASCADE, related_name='parent_list')
+#
+# 	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+# 	object_id = models.PositiveIntegerField(null=True, blank=True)
+# 	member = GenericForeignKey('content_type', 'object_id')
+#
+# 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='list_store')
+# 	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='list_store')
+#
+# 	access = models.CharField(max_length=32, choices=DataAccessType.choices)
+#
+# 	def __str__(self):
+# 		return self.feature.name + '\'s list store'
+#
+# class MapStore(models.Model):
+# 	''' simple data store for features '''
+# 	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='map_store')
+#
+# 	# should be unique for each map
+# 	key = models.CharField(max_length=128)
+# 	# member = models.models.ForeignKey(SimpleStore, on_delete=models.CASCADE, related_name='parent_map')
+#
+# 	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+# 	object_id = models.PositiveIntegerField(null=True, blank=True)
+# 	member = GenericForeignKey('content_type', 'object_id')
+#
+# 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='map_store')
+# 	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='map_store')
+#
+# 	access = models.CharField(max_length=32, choices=DataAccessType.choices)
+#
+# 	def __str__(self):
+# 		return self.feature.name + '\'s map store'

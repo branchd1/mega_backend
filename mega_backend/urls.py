@@ -18,8 +18,8 @@ api_router = routers.DefaultRouter()
 api_router.register(r'profiles', core_views.ProfileViewSet, basename='profile')
 api_router.register(r'features', core_views.FeatureViewSet, basename='feature')
 api_router.register(r'simplestores', core_views.SimpleStoreViewSet, basename='simplestore')
-api_router.register(r'liststores', core_views.ListStoreViewSet, basename='liststore')
-api_router.register(r'mapstores', core_views.MapStoreViewSet, basename='mapstore')
+# api_router.register(r'liststores', core_views.ListStoreViewSet, basename='liststore')
+# api_router.register(r'mapstores', core_views.MapStoreViewSet, basename='mapstore')
 api_router.register(r'communities', core_views.CommunityViewSet, basename='community')
 
 # the urls

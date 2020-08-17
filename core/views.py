@@ -8,7 +8,7 @@ from core import serializers as my_serializers
 
 from core.permissions import IsOwner
 
-from core.models import Community, Feature
+from core.models import Community, Feature, DataAccessType, SimpleStore
 
 from django.contrib.auth.models import User
 
@@ -60,15 +60,15 @@ class SimpleStoreViewSet(viewsets.ModelViewSet):
 	serializer_class = my_serializers.SimpleStoreSerializer
 	permission_classes = []
 
-class ListStoreViewSet(viewsets.ModelViewSet):
-	''' list store view set '''
-	serializer_class = my_serializers.ListStoreSerializer
-	permission_classes = []
-
-class MapStoreViewSet(viewsets.ModelViewSet):
-	''' map store view set '''
-	serializer_class = my_serializers.MapStoreSerializer
-	permission_classes = []
+# class ListStoreViewSet(viewsets.ModelViewSet):
+# 	''' list store view set '''
+# 	serializer_class = my_serializers.ListStoreSerializer
+# 	permission_classes = []
+#
+# class MapStoreViewSet(viewsets.ModelViewSet):
+# 	''' map store view set '''
+# 	serializer_class = my_serializers.MapStoreSerializer
+# 	permission_classes = []
 
 class CommunityViewSet(viewsets.ModelViewSet):
 	''' community view set '''
@@ -199,5 +199,33 @@ class DataStore(views.APIView):
 
 	def post(self, request):
 		_data = request.data
-		print(_data)
+
+		_tag = request.data.get('mega$tag')
+
+		_access = None
+		_access_proxy = request.data.get('mega$access')
+		if _access_proxy == 'public':
+			_access = DataAccessType.PUBLIC
+		else:
+			_access = DataAccessType.USER
+
+		_community_id = request.data.get('mega$community')
+		_community = Community.objects.get(pk=_community_id)
+
+		_feature_key = request.data.get('mega$feature')
+		_feature = Feature.objects.get(key=_feature_key)
+
+		# remove special keys
+		_special_keys = []
+
+		for key, val in _data.items():
+			if 'mega$' in key:
+				_special_keys.append(key)
+
+		for key in _special_keys:
+			del _data[key]
+
+		# create map store
+		store = SimpleStore.objects.create(feature=_feature, key=_tag, access=_access, user=request.user, community=_community, value=_data)
+
 		return Response({})

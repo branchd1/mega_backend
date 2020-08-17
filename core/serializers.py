@@ -33,18 +33,18 @@ class SimpleStoreSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 		read_only_fields = ['id']
 
-class ListStoreSerializer(serializers.ModelSerializer):
-	''' Serialize list store '''
-	class Meta:
-		model = my_models.ListStore
-		fields = '__all__'
-		read_only_fields = ['id']
-		exclude = ['content_type', 'object_id']
-
-class MapStoreSerializer(serializers.ModelSerializer):
-	''' Serialize map store '''
-	class Meta:
-		model = my_models.MapStore
-		fields = '__all__'
-		read_only_fields = ['id']
-		exclude = ['content_type', 'object_id']
+# class ListStoreSerializer(serializers.ModelSerializer):
+# 	''' Serialize list store '''
+# 	class Meta:
+# 		model = my_models.ListStore
+# 		fields = '__all__'
+# 		read_only_fields = ['id']
+# 		exclude = ['content_type', 'object_id']
+#
+# class MapStoreSerializer(serializers.ModelSerializer):
+# 	''' Serialize map store '''
+# 	class Meta:
+# 		model = my_models.MapStore
+# 		fields = '__all__'
+# 		read_only_fields = ['id']
+# 		exclude = ['content_type', 'object_id']
