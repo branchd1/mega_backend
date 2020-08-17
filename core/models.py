@@ -55,6 +55,9 @@ class Feature(models.Model):
 
 	payload = models.TextField()
 
+	class Meta:
+		ordering = ['id']
+
 	def get_random_key(self):
 		''' generate a random key '''
 		_key = User.objects.make_random_password(length=10, allowed_chars="abcdefghjkmnpqrstuvwxyz01234567889")
