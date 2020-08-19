@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import gettext_lazy as _
 
+import jsonfield
+
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
@@ -29,8 +31,9 @@ class CommunityType(models.TextChoices):
 
 class DataAccessType(models.TextChoices):
 	''' specifies the types of communities '''
-	PUBLIC = 'PUBL', _('Public')
+	COMMUNITY = 'PUBL', _('Public')
 	USER = 'USER', _('User')
+	ADMIN = 'ADMN', _('Admin')
 
 # Models
 
@@ -137,6 +140,11 @@ class Community(models.Model):
 			return True
 		return False
 
+	def is_admin(self, user):
+		if user in self.admins.all():
+			return True
+		return False
+
 # datastore models
 
 class SimpleStore(models.Model):
@@ -144,12 +152,17 @@ class SimpleStore(models.Model):
 	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='simple_store')
 
 	key = models.CharField(max_length=128)
-	value = models.TextField()
+	value = jsonfield.JSONField()
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='simple_store')
 	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='simple_store')
 
 	access = models.CharField(max_length=32, choices=DataAccessType.choices)
+
+	date = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-date']
 
 	def __str__(self):
 		return self.feature.name + '\'s simple store'

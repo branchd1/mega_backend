@@ -9,7 +9,7 @@ class IsOwner(permissions.BasePermission):
         # Write permissions are only allowed to the owner of the object.
         return obj.user == request.user
         
-class IsCommunityOwner(permissions.BasePermission):
+class IsCommunityAdmin(permissions.BasePermission):
     """
     Custom permission to allow only owners of an object to edit it.
     """

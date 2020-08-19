@@ -176,26 +176,28 @@ class AddFeatureToCommunity(views.APIView):
 class DataStore(views.APIView):
 	''' stores data sent '''
 	def get(self, request):
-		pass
-		# _key = request.data.get('key')
-		# if _key:
-		# 	_response_dict = None
-		# 	try:
-		# 		_community = Community.objects.get(key=_key)
-		# 	except Community.DoesNotExist:
-		# 		# email has not been used
-		# 		_response_dict = {
-		# 			'key': 'Incorrect key'
-		# 		}
-		# 		return Response(_response_dict, status=400)
-		# 	# email has been used
-		# 	_community.members.add(request.user)
-		# 	return Response({})
-		# else:
-		# 	_response_dict = {
-		# 		'key': 'Enter a key'
-		# 	}
-		# 	return Response(_response_dict, status=400)
+		_tag = request.GET.get('mega$tag')
+
+		_community_id = request.GET.get('mega$community')
+		_community = Community.objects.get(pk=_community_id)
+
+		_feature_key = request.GET.get('mega$feature')
+		_feature = Feature.objects.get(key=_feature_key)
+
+		_stores = SimpleStore.objects.filter(feature=_feature, key=_tag, community=_community)
+
+		_filter_stores_id_by_access = []
+		for _store in _stores:
+			if filter_stores_by_access(_store, request.user) is not None:
+				_filter_stores_id_by_access.append(_store.pk)
+
+		_stores = _stores.filter(id__in=_filter_stores_id_by_access)
+
+		_res = my_serializers.SimpleStoreSerializer(_stores, many=True)
+
+		_res_data = _res.data
+
+		return Response(_res_data)
 
 	def post(self, request):
 		_data = request.data
@@ -205,7 +207,9 @@ class DataStore(views.APIView):
 		_access = None
 		_access_proxy = request.data.get('mega$access')
 		if _access_proxy == 'public':
-			_access = DataAccessType.PUBLIC
+			_access = DataAccessType.COMMUNITY
+		elif _access_proxy == 'admin':
+			_access = DataAccessType.ADMIN
 		else:
 			_access = DataAccessType.USER
 
@@ -228,4 +232,19 @@ class DataStore(views.APIView):
 		# create map store
 		store = SimpleStore.objects.create(feature=_feature, key=_tag, access=_access, user=request.user, community=_community, value=_data)
 
-		return Response({})
+		return Response({}, status=201)
+
+# helper functions
+def filter_stores_by_access(store, user):
+	if store.access == DataAccessType.USER:
+		if store.user == user:
+			return store
+		return None
+	elif store.access == DataAccessType.COMMUNITY:
+		if store.is_admin_or_member(user):
+			return store
+		return None
+	elif store.access == DataAccessType.ADMIN:
+		if store.is_admin(user):
+			return store
+		return None
