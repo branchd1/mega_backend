@@ -24,10 +24,11 @@ api_router.register(r'communities', core_views.CommunityViewSet, basename='commu
 
 # the urls
 
-urlpatterns = [
-	path('api/', include(core_urls)),
-	path('api/', include(api_router.urls)),
-    path('admin/', admin.site.urls),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = \
+    [
+        path('api/', include(core_urls)),
+        path('api/', include(api_router.urls)),
+        path('admin/', admin.site.urls),
+        path('auth/', include('djoser.urls')),
+        path('auth/', include('djoser.urls.authtoken')),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
