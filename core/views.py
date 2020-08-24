@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from rest_framework import viewsets, views
 
 from rest_framework.response import Response
@@ -8,13 +7,21 @@ from core import serializers as my_serializers
 
 from core.permissions import IsOwner
 
-from core.models import Community, Feature, DataAccessType, SimpleStore
+from core.models import Community, Feature, DataAccessType, SimpleStore, UploadedImage
 
 from django.contrib.auth.models import User
 
 from django.db.models import Q, BooleanField, Value
 
 from itertools import chain
+
+from rest_framework.parsers import FileUploadParser
+
+from django.core.files.base import ContentFile
+
+import io
+
+from django.core.files.images import ImageFile
 
 
 # Views here
@@ -248,6 +255,16 @@ class DataStore(views.APIView):
                                            community=_community, value=_data)
 
         return Response({}, status=201)
+
+
+class UploadImage(views.APIView):
+    """ upload image and return URL """
+    parser_class = (FileUploadParser,)
+
+    def post(self, request):
+        image = ImageFile(io.BytesIO(request.body))
+        uploaded_image = UploadedImage.objects.create(image=image)
+        return Response({'url': uploaded_image.image.url})
 
 
 # helper functions

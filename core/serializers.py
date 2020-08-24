@@ -38,7 +38,8 @@ class SimpleStoreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = my_models.SimpleStore
-        fields = ['key', 'value']
+        fields = ['id', 'key', 'value']
+        read_only_fields = ['id']
 
 # class ListStoreSerializer(serializers.ModelSerializer):
 # 	""" Serialize list store """

@@ -173,6 +173,14 @@ class SimpleStore(models.Model):
     def __str__(self):
         return self.feature.name + '\'s simple store'
 
+class UploadedImage(models.Model):
+    """ stores uploaded images via features """
+
+    image = models.ImageField(upload_to='features/')
+
+    def __str__(self):
+        return 'Image'
+
 # class ListStore(models.Model):
 # 	""" list data store for features """
 # 	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='list_store')
