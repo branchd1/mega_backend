@@ -1,3 +1,6 @@
+import base64
+import json
+
 from django.shortcuts import render
 from rest_framework import viewsets, views
 
@@ -17,11 +20,9 @@ from itertools import chain
 
 from rest_framework.parsers import FileUploadParser
 
+from django.contrib.sites.models import Site
+
 from django.core.files.base import ContentFile
-
-import io
-
-from django.core.files.images import ImageFile
 
 
 # Views here
@@ -262,9 +263,11 @@ class UploadImage(views.APIView):
     parser_class = (FileUploadParser,)
 
     def post(self, request):
-        image = ImageFile(io.BytesIO(request.body))
-        uploaded_image = UploadedImage.objects.create(image=image)
-        return Response({'url': uploaded_image.image.url})
+        uploaded_image = UploadedImage.objects.create(image=request.FILES['file'])
+
+        current_site = Site.objects.get_current()
+
+        return Response({'url': current_site.domain + uploaded_image.image.url})
 
 
 # helper functions
