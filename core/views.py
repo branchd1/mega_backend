@@ -18,7 +18,7 @@ from django.db.models import Q, BooleanField, Value
 
 from itertools import chain
 
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import MultiPartParser
 
 from django.contrib.sites.models import Site
 
@@ -86,6 +86,7 @@ class CommunityViewSet(viewsets.ModelViewSet):
     """ community view set """
     serializer_class = my_serializers.CommunitySerializer
     permission_classes = [IsOwner]
+    parser_classes = (MultiPartParser, )
 
     def perform_create(self, serializer):
         community = serializer.save()
@@ -102,7 +103,6 @@ class CommunityViewSet(viewsets.ModelViewSet):
         _queryset = list(chain(_queryset1, _queryset2))
 
         return _queryset
-
 
 class CheckEmail(views.APIView):
     """ checks if an email exists """
@@ -260,7 +260,7 @@ class DataStore(views.APIView):
 
 class UploadImage(views.APIView):
     """ upload image and return URL """
-    parser_class = (FileUploadParser,)
+    parser_class = (MultiPartParser,)
 
     def post(self, request):
         uploaded_image = UploadedImage.objects.create(image=request.FILES['file'])

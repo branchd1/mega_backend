@@ -94,7 +94,7 @@ class Community(models.Model):
     """ communities which organisations create """
     name = models.CharField(max_length=32)
     type = models.CharField(max_length=32, choices=CommunityType.choices)
-    picture = models.ImageField(upload_to='community_pictures/', null=True, blank=True)
+    picture = models.ImageField(upload_to='community_pictures/')
     description = models.TextField(default='')
 
     # determines if the community can be joined by anyone or only by people with the key
