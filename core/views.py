@@ -56,21 +56,11 @@ class SimpleStoreViewSet(viewsets.ModelViewSet):
     permission_classes = []
 
 
-# class ListStoreViewSet(viewsets.ModelViewSet):
-# 	""" list store view set """
-# 	serializer_class = my_serializers.ListStoreSerializer
-# 	permission_classes = []
-#
-# class MapStoreViewSet(viewsets.ModelViewSet):
-# 	""" map store view set """
-# 	serializer_class = my_serializers.MapStoreSerializer
-# 	permission_classes = []
-
 class CommunityViewSet(viewsets.ModelViewSet):
     """ community view set """
     serializer_class = my_serializers.CommunitySerializer
     permission_classes = [IsOwner]
-    parser_classes = (MultiPartParser, )
+    parser_classes = (MultiPartParser,)
 
     def perform_create(self, serializer):
         community = serializer.save()
@@ -87,6 +77,7 @@ class CommunityViewSet(viewsets.ModelViewSet):
         _queryset = list(chain(_queryset1, _queryset2))
 
         return _queryset
+
 
 class CheckEmail(views.APIView):
     """ checks if an email exists """
