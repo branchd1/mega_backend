@@ -9,7 +9,7 @@ from django.urls import path, include
 from rest_framework import routers
 from core import views as core_views, urls as core_urls
 
-from accounts import urls as accounts_urls
+from accounts import views as accounts_views, urls as accounts_urls
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -17,7 +17,7 @@ from django.conf import settings
 # DRF router configuration
 
 api_router = routers.DefaultRouter()
-api_router.register(r'profiles', core_views.ProfileViewSet, basename='profile')
+api_router.register(r'profiles', accounts_views.ProfileViewSet, basename='profile')
 api_router.register(r'features', core_views.FeatureViewSet, basename='feature')
 api_router.register(r'simplestores', core_views.SimpleStoreViewSet, basename='simplestore')
 api_router.register(r'communities', core_views.CommunityViewSet, basename='community')

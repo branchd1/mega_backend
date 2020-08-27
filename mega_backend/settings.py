@@ -136,6 +136,9 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'accounts/password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'accounts/username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SERIALIZERS': {
+        'user': 'accounts.serializers.SpecialUserSerializer',
+    }
 }
 
 # DRF settings
@@ -144,8 +147,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        #remove below
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': [

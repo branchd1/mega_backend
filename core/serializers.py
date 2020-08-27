@@ -5,15 +5,6 @@ from . import models as my_models
 
 # Serializers
 
-class ProfileSerializer(serializers.ModelSerializer):
-    """ Serialize profile """
-
-    class Meta:
-        model = my_models.Profile
-        fields = '__all__'
-        read_only_fields = ['id']
-
-
 class FeatureSerializer(serializers.ModelSerializer):
     """ Serialize feature """
 

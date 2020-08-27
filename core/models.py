@@ -6,9 +6,6 @@ from django.utils.translation import gettext_lazy as _
 
 import jsonfield
 
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
-
 
 # Constants
 
@@ -39,16 +36,6 @@ class DataAccessType(models.TextChoices):
 
 
 # Models
-
-class Profile(models.Model):
-    """ user profile to hold extra data from django's default User class """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
-    phone_number = models.CharField(max_length=16, null=True, blank=True)
-
-    def __str__(self):
-        return self.user.username + '\'s profile'
-
 
 class Feature(models.Model):
     """ features built by 3rd party developers """
