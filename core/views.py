@@ -267,7 +267,8 @@ class UploadImage(views.APIView):
 
         current_site = Site.objects.get_current()
 
-        return Response({'url': current_site.domain + uploaded_image.image.url})
+        # remove hardcoded 'http://'
+        return Response({'url': 'http://' + current_site.domain + uploaded_image.image.url})
 
 
 # helper functions

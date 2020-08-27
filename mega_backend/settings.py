@@ -132,11 +132,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Djoser auth
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
 }
-
 
 # DRF settings
 REST_FRAMEWORK = {
@@ -154,3 +153,6 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ]
 }
+
+# email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
