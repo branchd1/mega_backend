@@ -25,7 +25,7 @@ SECRET_KEY = 'u&5++sd#y-v&5h)4vio%6p%j$#&(bbs(mmv*e&n!%=*e+dzw_5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'mega-app-project.herokuapp.com']
 
 # Application definition
 
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'jsonfield',
-    'django.contrib.sites'
+    'django.contrib.sites',
+    'corsheaders',
 ]
 
 SITE_ID = 1
@@ -50,6 +51,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -155,10 +157,16 @@ REST_FRAMEWORK = {
     ]
 }
 
-# email
+# Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mega.app.project.2020@gmail.com'
 EMAIL_HOST_PASSWORD = 'MegaApp$'
+
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    'http://0.0.0.0:9000',
+    'https://mega-app-project.herokuapp.com'
+]
