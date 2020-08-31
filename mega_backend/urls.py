@@ -11,6 +11,8 @@ from core import views as core_views, urls as core_urls
 
 from accounts import views as accounts_views, urls as accounts_urls
 
+from developer import urls as developer_urls
+
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -31,6 +33,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('accounts/', include(accounts_urls)),
+    path('developer/', include(developer_urls)),
 ]
 
 if settings.DEBUG:
