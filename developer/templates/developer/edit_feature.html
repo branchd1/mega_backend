@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block body %}
+<div class="container">
+    <div>
+        <h3>Edit Feature</h3>
+    </div>
+    <form method="post" class="form-width">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            {{ field }}
+            <span class="form-text text-danger">{{ field.errors }}</span>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

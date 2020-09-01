@@ -18,3 +18,7 @@ a.card:hover{
 .border-dashed{
     border: 4px dashed grey;
 }
+
+.nav-item{
+    padding-left: 10px;
+}
