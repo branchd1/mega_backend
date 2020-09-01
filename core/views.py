@@ -36,7 +36,7 @@ class FeatureViewSet(viewsets.ModelViewSet):
             except Community.DoesNotExist:
                 return None
             used_features_id = _community.features.all().values('id')
-            _queryset = Feature.objects.filter(community_type=_community_type).exclude(id__in=used_features_id)
+            _queryset = Feature.objects.filter(community_type=_community_type, approved=True).exclude(id__in=used_features_id)
             return _queryset
         if _community_id:
             try:
@@ -45,7 +45,7 @@ class FeatureViewSet(viewsets.ModelViewSet):
                 return None
             if not _community.is_admin_or_member(_user):
                 return None
-            _queryset = _community.features.all()
+            _queryset = _community.features.filter(approved=True)
             return _queryset
         return None
 

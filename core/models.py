@@ -51,6 +51,8 @@ class Feature(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='features')
 
+    approved = models.BooleanField(default=False)
+
     class Meta:
         ordering = ['id']
 
