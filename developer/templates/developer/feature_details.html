@@ -19,6 +19,19 @@
              </div>
 
              <div class="my-3">
+                  <p class="mb-0">
+                      {% if feature.approved == True %}
+                      Approved
+                      {% elif feature.approved == False %}
+                      Rejected
+                      {% else %}
+                      Not evaluated
+                      {% endif %}
+                  </p>
+                  <small>approval status</small>
+             </div>
+
+             <div class="my-3">
                  <p class="mb-0 border border-rounded p-2">{{ feature.description }}</p>
                  <small>description</small>
              </div>
@@ -31,19 +44,6 @@
               <div class="my-3">
                   <p class="mb-0">{{ feature.key }}</p>
                   <small>key</small>
-             </div>
-
-             <div class="my-3">
-                  <p class="mb-0">
-                      {% if feature.approved == True %}
-                      Approved
-                      {% elif feature.approved == False %}
-                      Rejected
-                      {% else %}
-                      Not evaluated
-                      {% endif %}
-                  </p>
-                  <small>approval status</small>
              </div>
 
              <a href="{% url 'developer:edit_feature' feature.pk %}" class="btn btn-primary">Edit details</a>
