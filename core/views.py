@@ -30,6 +30,7 @@ class FeatureViewSet(viewsets.ModelViewSet):
         _user = self.request.user
         _community_id = self.request.GET.get('community')
         _community_type = self.request.GET.get('type')
+        
         if _community_type:
             try:
                 _community = Community.objects.get(id=_community_id)
