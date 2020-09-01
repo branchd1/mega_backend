@@ -44,7 +44,7 @@ def add_feature(request):
     _feature_form = None
 
     if request.method == 'POST':
-        _feature_form = FeatureForm(request.POST)
+        _feature_form = FeatureForm(data=request.POST, files=request.FILES)
 
         if _feature_form.is_valid():
             _feature = _feature_form.save(commit=False)
@@ -72,7 +72,7 @@ def edit_feature(request, feature_id):
     _feature_form = None
 
     if request.method == 'POST':
-        _feature_form = FeatureForm(request.POST, instance=_feature)
+        _feature_form = FeatureForm(data=request.POST, files=request.FILES, instance=_feature)
 
         if _feature_form.is_valid():
             _feature = _feature_form.save()
