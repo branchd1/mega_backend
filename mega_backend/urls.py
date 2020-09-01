@@ -19,9 +19,9 @@ from django.conf import settings
 # DRF router configuration
 
 api_router = routers.DefaultRouter()
+api_router.register(r'communitytypes', core_views.CommunityTypeViewSet, basename='communitytype')
 api_router.register(r'profiles', accounts_views.ProfileViewSet, basename='profile')
 api_router.register(r'features', core_views.FeatureViewSet, basename='feature')
-api_router.register(r'simplestores', core_views.SimpleStoreViewSet, basename='simplestore')
 api_router.register(r'communities', core_views.CommunityViewSet, basename='community')
 
 # the urls

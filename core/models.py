@@ -9,25 +9,6 @@ import jsonfield
 
 # Constants
 
-class CommunityType(models.TextChoices):
-    """ specifies the types of communities """
-    BAR = 'BAR', _('Bar')
-    RESTAURANT = 'RES', _('Restaurant')
-    CLUB = 'CLB', _('Club')
-    RELIGIOUS_INSTITUTION = 'REI', _('Religious institution')
-    OFFICE = 'OFF', _('Office')
-    SUPERMARKET = 'SMT', _('Supermarket')
-    CINEMA = 'CNA', _('Cinema')
-    HOSPITAL = 'HOS', _('Hospital')
-    HOTEL = 'HTL', _('Hotel')
-    RETAIL_STORE = 'RSE', _('Retail store')
-    ESTATE = 'EST', _('Estate')
-    PRO_SERVICES = 'PRS', _('Professional services')
-    E_COM = 'ECO', _('eCommerce')
-    SCHOOL = 'SCH', _('School')
-    ENTERTAINMENT = 'ENT', _('Entertainment')
-
-
 class DataAccessType(models.TextChoices):
     """ specifies the types of communities """
     COMMUNITY = 'PUBL', _('Public')
@@ -80,10 +61,19 @@ class Feature(models.Model):
         return self.name
 
 
+class CommunityType(models.Model):
+    """ represents community types """
+    value = models.CharField(max_length=32, unique=True)
+
+    def __str__(self):
+        return self.value
+
+
 class Community(models.Model):
     """ communities which organisations create """
     name = models.CharField(max_length=32)
-    type = models.CharField(max_length=32, choices=CommunityType.choices)
+    type = models.ForeignKey(
+        CommunityType, on_delete=models.SET_DEFAULT, default=1, related_name='communities_with_type')
     picture = models.ImageField(upload_to='community_pictures/')
     description = models.TextField(default='')
 
@@ -139,6 +129,9 @@ class Community(models.Model):
         if user in self.admins.all():
             return True
         return False
+
+    def get_community_type_value(self):
+        return self.type.value
 
 
 # datastore models

@@ -6,7 +6,7 @@ from core import serializers as my_serializers
 
 from core.permissions import IsOwner
 
-from core.models import Community, Feature, DataAccessType, SimpleStore, UploadedImage
+from core.models import Community, Feature, DataAccessType, SimpleStore, UploadedImage, CommunityType
 
 from django.contrib.auth.models import User
 
@@ -53,10 +53,10 @@ class FeatureViewSet(viewsets.ModelViewSet):
         return None
 
 
-class SimpleStoreViewSet(viewsets.ModelViewSet):
-    """ simple store view set """
-    serializer_class = my_serializers.SimpleStoreSerializer
-    permission_classes = []
+class CommunityTypeViewSet(viewsets.ModelViewSet):
+    """ community type view set """
+    serializer_class = my_serializers.CommunityTypeSerializer
+    queryset = CommunityType.objects.all()
 
 
 class CommunityViewSet(viewsets.ModelViewSet):
@@ -66,6 +66,8 @@ class CommunityViewSet(viewsets.ModelViewSet):
     parser_classes = (MultiPartParser,)
 
     def perform_create(self, serializer):
+        _community_type = CommunityType.objects.get(value=serializer.validated_data['type'])
+        print(_community_type.value)
         community = serializer.save()
         community.admins.add(self.request.user)
 

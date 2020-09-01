@@ -16,6 +16,7 @@ class FeatureSerializer(serializers.ModelSerializer):
 class CommunitySerializer(serializers.ModelSerializer):
     """ Serialize community """
     is_admin = serializers.BooleanField(read_only=True)
+    type_value = serializers.CharField(source='get_community_type_value', read_only=True)
 
     class Meta:
         model = my_models.Community
@@ -28,4 +29,12 @@ class SimpleStoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = my_models.SimpleStore
         fields = ['id', 'key', 'value']
+        read_only_fields = ['id']
+
+
+class CommunityTypeSerializer(serializers.ModelSerializer):
+    """ Serialize community type """
+    class Meta:
+        model = my_models.CommunityType
+        fields = '__all__'
         read_only_fields = ['id']
