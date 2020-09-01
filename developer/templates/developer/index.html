@@ -3,5 +3,30 @@
 {% block title %}- developer{% endblock %}
 
 {% block body %}
-
+<div class="container">
+    <div>
+        <h3>Your Features</h3>
+    </div>
+    <div class="row">
+        {% for feature in features %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card width-18">
+                <img src="{{ MEDIA_URL }}{{ feature.picture.url }}" class="card-img-top" alt="Feature Image">
+                 <div class="card-body">
+                    <h5 class="card-title">{{ feature.name }}</h5>
+                    <small class="card-text">{{ feature.community_type }}</small>
+                    <p class="card-text">{{ feature.description }}</p>
+                    <p class="card-text">{{ feature.key }}</p>
+                    <a href="{% url 'developer:feature_details' feature.pk %}" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="{% url 'developer:add_feature' %}" class="card" style="width: 18rem; height: 100%;">
+                <span class="my-auto mx-auto">add feature</span>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

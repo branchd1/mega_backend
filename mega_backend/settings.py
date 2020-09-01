@@ -173,3 +173,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://0.0.0.0:9000',
     'https://mega-app-project.herokuapp.com'
 ]
+
+# accounts
+LOGOUT_REDIRECT_URL='accounts:login'
+LOGIN_REDIRECT_URL = 'developer:index'

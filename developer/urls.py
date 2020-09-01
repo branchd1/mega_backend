@@ -5,5 +5,8 @@ from developer import views
 app_name = 'developer'
 
 urlpatterns = [
-    path('', views.index, name='home'),
+    path('', views.index, name='index'),
+    path('add-feature/', views.add_feature, name='add_feature'),
+    path('edit-feature/', views.edit_feature, name='edit_feature'),
+    path('feature-details/<int:feature_id>', views.feature_details, name='feature_details'),
 ]

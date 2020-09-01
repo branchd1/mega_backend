@@ -39,4 +39,3 @@ class SpecialUserView(views.APIView):
             return Response(_user_serializer.data)
         else:
             return Response(_user_serializer.errors, status=400)
-

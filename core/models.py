@@ -49,6 +49,8 @@ class Feature(models.Model):
 
     payload = models.TextField()
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='features')
+
     class Meta:
         ordering = ['id']
 
@@ -160,6 +162,7 @@ class SimpleStore(models.Model):
     def __str__(self):
         return self.feature.name + '\'s simple store'
 
+
 class UploadedImage(models.Model):
     """ stores uploaded images via features """
 
@@ -167,43 +170,3 @@ class UploadedImage(models.Model):
 
     def __str__(self):
         return 'Image'
-
-# class ListStore(models.Model):
-# 	""" list data store for features """
-# 	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='list_store')
-#
-# 	# should be unique for each list
-# 	key = models.CharField(max_length=128)
-# 	# member = models.ForeignKey(SimpleStore, on_delete=models.CASCADE, related_name='parent_list')
-#
-# 	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-# 	object_id = models.PositiveIntegerField(null=True, blank=True)
-# 	member = GenericForeignKey('content_type', 'object_id')
-#
-# 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='list_store')
-# 	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='list_store')
-#
-# 	access = models.CharField(max_length=32, choices=DataAccessType.choices)
-#
-# 	def __str__(self):
-# 		return self.feature.name + '\'s list store'
-#
-# class MapStore(models.Model):
-# 	""" simple data store for features """
-# 	feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='map_store')
-#
-# 	# should be unique for each map
-# 	key = models.CharField(max_length=128)
-# 	# member = models.models.ForeignKey(SimpleStore, on_delete=models.CASCADE, related_name='parent_map')
-#
-# 	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-# 	object_id = models.PositiveIntegerField(null=True, blank=True)
-# 	member = GenericForeignKey('content_type', 'object_id')
-#
-# 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='map_store')
-# 	community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='map_store')
-#
-# 	access = models.CharField(max_length=32, choices=DataAccessType.choices)
-#
-# 	def __str__(self):
-# 		return self.feature.name + '\'s map store'

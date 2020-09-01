@@ -1,4 +1,17 @@
+a, a:hover, a:focus{
+    text-decoration: none;
+}
+
 .form-width{
     min-width: 300px;
     width: 50%;
+}
+
+.width-18{
+    width: 18rem;
+}
+
+a.card:hover{
+    background-color: lightgrey;
+    text-color: white;
 }

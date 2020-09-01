@@ -2,7 +2,7 @@ from django.urls import path, reverse_lazy
 
 from django.contrib.auth import views as auth_views
 
-from accounts.forms import MySetPasswordForm
+from accounts.forms import MySetPasswordForm, MyAuthenticationForm
 
 from accounts.views import SpecialUserView
 
@@ -24,4 +24,11 @@ urlpatterns = [
              template_name='accounts/registration/my_password_reset_complete.html',
          ),
          name='password_reset_complete'),
+    path('login/',
+         auth_views.LoginView.as_view(
+            template_name='accounts/registration/login.html',
+            authentication_form=MyAuthenticationForm,
+            redirect_authenticated_user=True
+         ), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout')
 ]
