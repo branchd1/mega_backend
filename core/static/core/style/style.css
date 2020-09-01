@@ -1,4 +1,4 @@
-a, a:hover, a:focus{
+a:hover{
     text-decoration: none;
 }
 
@@ -13,5 +13,8 @@ a, a:hover, a:focus{
 
 a.card:hover{
     background-color: lightgrey;
-    text-color: white;
+}
+
+.border-dashed{
+    border: 4px dashed grey;
 }
