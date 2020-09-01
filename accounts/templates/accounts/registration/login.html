@@ -1,26 +1,12 @@
 {% extends 'core/base.html' %}
 
+{% load form %}
+
 {% block body %}
 <div class="container">
     <h3>Login</h3>
-    <form method="post" class="form-width">
-        {% csrf_token %}
 
-        {{ form.non_field_errors }}
+    {% form %}
 
-        {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field.errors }}
-            {{ hidden_field }}
-        {% endfor %}
-
-        {% for field in form.visible_fields %}
-        <div class="form-group">
-            {{ field }}
-            <span class="form-text text-danger">{{ field.errors }}</span>
-        </div>
-        {% endfor %}
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 </div>
 {% endblock %}
