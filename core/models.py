@@ -41,7 +41,6 @@ class Feature(models.Model):
     """ features built by 3rd party developers """
     name = models.CharField(max_length=32)
     picture = models.ImageField(upload_to='feature_pictures/')
-    community_type = models.CharField(max_length=32, choices=CommunityType.choices)
     description = models.TextField()
 
     # used to validate

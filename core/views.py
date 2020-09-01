@@ -29,16 +29,17 @@ class FeatureViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         _user = self.request.user
         _community_id = self.request.GET.get('community')
-        _community_type = self.request.GET.get('type')
+        _all_features = self.request.GET.get('all')
 
-        if _community_type:
+        if _all_features:
             try:
                 _community = Community.objects.get(id=_community_id)
             except Community.DoesNotExist:
                 return None
             used_features_id = _community.features.all().values('id')
-            _queryset = Feature.objects.filter(community_type=_community_type, approved=True).exclude(id__in=used_features_id)
+            _queryset = Feature.objects.filter(approved=True).exclude(id__in=used_features_id)
             return _queryset
+
         if _community_id:
             try:
                 _community = Community.objects.get(id=_community_id)
@@ -48,6 +49,7 @@ class FeatureViewSet(viewsets.ModelViewSet):
                 return None
             _queryset = _community.features.filter(approved=True)
             return _queryset
+
         return None
 
 
