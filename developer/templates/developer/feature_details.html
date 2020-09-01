@@ -10,12 +10,30 @@
     <div>
         <img src="{{ MEDIA_URL }}{{ feature.picture.url }}" alt="Feature Image" class="width-18">
          <div class="mt-3">
-            <h5>{{ feature.name }}</h5>
-            <small>{{ feature.get_community_type_display }}</small>
-            <p>{{ feature.description }}</p>
-            <p>{{ feature.key }}</p>
-            <p>{{ feature.payload }}</p>
-            <a href="{% url 'developer:edit_feature' feature.pk %}" class="btn btn-primary">Edit details</a>
+             <div>
+                 <h5>{{ feature.name }}</h5>
+             </div>
+
+             <div>
+                 <small>for {{ feature.get_community_type_display }}</small>
+             </div>
+
+             <div class="my-3">
+                 <p class="mb-0">{{ feature.description }}</p>
+                 <small>description</small>
+             </div>
+
+             <div class="my-3">
+                 <p class="mb-0">{{ feature.payload }}</p>
+                 <small>code</small>
+             </div>
+
+              <div class="my-3">
+                  <p class="mb-0">{{ feature.key }}</p>
+                  <small>key</small>
+             </div>
+
+             <a href="{% url 'developer:edit_feature' feature.pk %}" class="btn btn-primary">Edit details</a>
         </div>
     </div>
 </div>
