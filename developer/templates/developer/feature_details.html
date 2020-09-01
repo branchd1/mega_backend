@@ -33,6 +33,19 @@
                   <small>key</small>
              </div>
 
+             <div class="my-3">
+                  <p class="mb-0">
+                      {% if feature.approved == True %}
+                      Approved
+                      {% elif feature.approved == False %}
+                      Rejected
+                      {% else %}
+                      Not evaluated
+                      {% endif %}
+                  </p>
+                  <small>approval status</small>
+             </div>
+
              <a href="{% url 'developer:edit_feature' feature.pk %}" class="btn btn-primary">Edit details</a>
         </div>
     </div>
