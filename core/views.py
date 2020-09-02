@@ -157,6 +157,46 @@ class LeaveCommunity(views.APIView):
             return Response(_response_dict, status=400)
 
 
+class RemoveFeature(views.APIView):
+    """ remove feature from community """
+
+    def post(self, request):
+        _community_pk = request.data.get('community')
+        _feature_pk = request.data.get('feature')
+        if _community_pk and _feature_pk:
+            _response_dict = None
+
+            try:
+                _community = Community.objects.get(pk=_community_pk)
+            except Community.DoesNotExist:
+                _response_dict = {
+                    'community': 'Community does not exist'
+                }
+                return Response(_response_dict, status=400)
+
+            try:
+                _feature = Feature.objects.get(pk=_feature_pk)
+            except Feature.DoesNotExist:
+                _response_dict = {
+                    'feature': 'Feature does not exist'
+                }
+                return Response(_response_dict, status=400)
+
+            _community.features.remove(_feature)
+
+            return Response({})
+        elif _community_pk is None:
+            _response_dict = {
+                'community': 'Enter a community'
+            }
+            return Response(_response_dict, status=400)
+        else:
+            _response_dict = {
+                'feature': 'Enter a feature'
+            }
+            return Response(_response_dict, status=400)
+
+
 class AddFeatureToCommunity(views.APIView):
     """ add a feature to a community """
 
