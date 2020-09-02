@@ -134,6 +134,29 @@ class JoinCommunity(views.APIView):
             return Response(_response_dict, status=400)
 
 
+class LeaveCommunity(views.APIView):
+    """ leave a community """
+
+    def post(self, request):
+        _community_pk = request.data.get('community')
+        if _community_pk:
+            _response_dict = None
+            try:
+                _community = Community.objects.get(pk=_community_pk)
+            except Community.DoesNotExist:
+                _response_dict = {
+                    'community': 'Community does not exist'
+                }
+                return Response(_response_dict, status=400)
+            _community.members.remove(request.user)
+            return Response({})
+        else:
+            _response_dict = {
+                'community': 'Enter a community'
+            }
+            return Response(_response_dict, status=400)
+
+
 class AddFeatureToCommunity(views.APIView):
     """ add a feature to a community """
 
