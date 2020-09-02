@@ -301,6 +301,35 @@ class DataStore(views.APIView):
         return Response({}, status=201)
 
 
+class DataStoreDelete(views.APIView):
+    """ delete data from store """
+    def delete(self, request, store_id):
+        _no_access_response_dict = {
+            'access': 'User does not have access to delete'
+        }
+
+        try:
+            _store = SimpleStore.objects.get(id=store_id)
+        except SimpleStore.DoesNotExist:
+            _response_dict = {
+                'datastore': 'Store data does not exist'
+            }
+            return Response(_response_dict, status=400)
+
+        if _store.access == DataAccessType.USER and not _store.user == request.user:
+            return Response(_no_access_response_dict, status=403)
+
+        if _store.access == DataAccessType.COMMUNITY and not _store.community.is_admin_or_member(_store.user):
+            return Response(_no_access_response_dict, status=403)
+
+        if _store.access == DataAccessType.ADMIN and not _store.community.is_admin(_store.user):
+            return Response(_no_access_response_dict, status=403)
+
+        _store.delete()
+
+        return Response({})
+
+
 class UploadImage(views.APIView):
     """ upload image and return URL """
     parser_class = (MultiPartParser,)
