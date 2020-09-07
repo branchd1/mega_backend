@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import gettext_lazy as _
 
-import jsonfield
+from django.contrib.postgres.fields import JSONField
 
 
 # Constants
@@ -141,7 +141,7 @@ class SimpleStore(models.Model):
     feature = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='simple_store')
 
     key = models.CharField(max_length=128)
-    value = jsonfield.JSONField()
+    value = JSONField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='simple_store')
     community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='simple_store')
