@@ -90,8 +90,12 @@ WSGI_APPLICATION = 'mega_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd2scahc5q7eu56',
+        'USER': 'tfqsgyjsddlahs',
+        'PASSWORD': '05f53e4efa6a19bbab43b778e8068513c6af79eaad5fe9a8402eccb6a7962cfe',
+        'HOST': 'ec2-54-217-206-236.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
