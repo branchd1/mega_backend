@@ -72,6 +72,7 @@
 </div>
 <div class="section" id="module-core.models">
 <span id="core-models-module"></span><h2>core.models module<a class="headerlink" href="#module-core.models" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the database models</p>
 <dl class="py class">
 <dt id="core.models.Community">
 <em class="property">class </em><code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">Community</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Community" title="Permalink to this definition">¶</a></dt>
@@ -296,20 +297,53 @@ object the first time, the query is executed.</p>
 <dt id="core.models.DataAccessType">
 <em class="property">class </em><code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">DataAccessType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.DataAccessType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.enums.TextChoices</span></code></p>
-<p>specifies the types of communities</p>
-<dl class="py attribute">
-<dt id="core.models.DataAccessType.ADMIN">
-<code class="sig-name descname">ADMIN</code><em class="property"> = 'ADMN'</em><a class="headerlink" href="#core.models.DataAccessType.ADMIN" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>Specifies the types of data access levels available in the simple store</p>
 <dl class="py attribute">
 <dt id="core.models.DataAccessType.COMMUNITY">
-<code class="sig-name descname">COMMUNITY</code><em class="property"> = 'PUBL'</em><a class="headerlink" href="#core.models.DataAccessType.COMMUNITY" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">COMMUNITY</code><a class="headerlink" href="#core.models.DataAccessType.COMMUNITY" title="Permalink to this definition">¶</a></dt>
+<dd><p>signifies that simple store instance is accessible to every member of a community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="core.models.DataAccessType.USER">
-<code class="sig-name descname">USER</code><em class="property"> = 'USER'</em><a class="headerlink" href="#core.models.DataAccessType.USER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">USER</code><a class="headerlink" href="#core.models.DataAccessType.USER" title="Permalink to this definition">¶</a></dt>
+<dd><p>signifies that simple store instance is only accessible to user who created it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.DataAccessType.ADMIN">
+<code class="sig-name descname">ADMIN</code><a class="headerlink" href="#core.models.DataAccessType.ADMIN" title="Permalink to this definition">¶</a></dt>
+<dd><p>signifies that simple store instance is only accessible to admin and user who created it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id0">
+<code class="sig-name descname">ADMIN</code><em class="property"> = 'ADMN'</em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id1">
+<code class="sig-name descname">COMMUNITY</code><em class="property"> = 'PUBL'</em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id2">
+<code class="sig-name descname">USER</code><em class="property"> = 'USER'</em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

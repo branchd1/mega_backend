@@ -1,3 +1,5 @@
+""" This module contains the database models """
+
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -10,7 +12,19 @@ from django.contrib.postgres.fields import JSONField
 # Constants
 
 class DataAccessType(models.TextChoices):
-    """ specifies the types of communities """
+    """
+    Specifies the types of data access levels available in the simple store
+
+    Attributes
+    ----------
+    COMMUNITY : str
+        signifies that simple store instance is accessible to every member of a community
+    USER : str
+        signifies that simple store instance is only accessible to user who created it
+    ADMIN : str
+        signifies that simple store instance is only accessible to admin and user who created it
+
+    """
     COMMUNITY = 'PUBL', _('Public')
     USER = 'USER', _('User')
     ADMIN = 'ADMN', _('Admin')
@@ -19,25 +33,61 @@ class DataAccessType(models.TextChoices):
 # Models
 
 class Feature(models.Model):
-    """ features built by 3rd party developers """
+
+    """
+    Represents features built by 3rd party developers
+
+    Attributes
+    ----------
+    name : str
+        The name of the feature
+    picture : obj
+        The picture representing the feature in UIs
+    desription : str
+        The description of the feature
+    key : str
+        A unique secret key used by feature developers to access the feature
+    payload : str
+        The code that instructs the frontend what components to display
+    User : obj
+        The user who owns the feature
+    approved : bool
+        True if the feature has been accepted to be displayed on the frontend by the admin,
+        False if rejected, and None otherwise
+
+    """
+
     name = models.CharField(max_length=32)
     picture = models.ImageField(upload_to='feature_pictures/')
     description = models.TextField()
-
-    # used to validate
     key = models.CharField(max_length=10, unique=True)
-
     payload = models.TextField()
-
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='features')
-
     approved = models.NullBooleanField()
 
     class Meta:
+
+        """
+        Contains additional information on the Feature class
+
+        Attributes
+        ----------
+        ordering : iterable
+            Specifies that a list of Feature class will be arranged in order according to the fields in the iterable
+
+        """
         ordering = ['id']
 
     def get_random_key(self):
-        """ generate a random key """
+        """
+        generate a random key
+
+        Returns
+        -------
+        str
+            a unique 10 character key which a Feature object can use for its key attribute
+
+        """
         _key = User.objects.make_random_password(length=10, allowed_chars="abcdefghjkmnpqrstuvwxyz01234567889")
 
         # check if the key already exists in another community and generate another
@@ -47,8 +97,6 @@ class Feature(models.Model):
         return _key
 
     def save(self, *args, **kwargs):
-        """ override the default save function """
-
         # check if the object is being created
         if not self.id:
             # assign the key
