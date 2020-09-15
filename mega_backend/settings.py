@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import os, sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'u&5++sd#y-v&5h)4vio%6p%j$#&(bbs(mmv*e&n!%=*e+dzw_5'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'u&5++sd#y-v&5h)4vio%6p%j$#&(bbs(mmv*e&n!%=*e+dzw_5')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 1
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'mega-app-project.herokuapp.com']
 
@@ -88,16 +88,28 @@ WSGI_APPLICATION = 'mega_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd2scahc5q7eu56',
-        'USER': 'tfqsgyjsddlahs',
-        'PASSWORD': '05f53e4efa6a19bbab43b778e8068513c6af79eaad5fe9a8402eccb6a7962cfe',
-        'HOST': 'ec2-54-217-206-236.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DB_NAME_TEST'),
+            'USER': os.environ.get('DB_USER_TEST'),
+            'PASSWORD': os.environ.get('DB_PASSWORD_TEST'),
+            'HOST': os.environ.get('DB_HOST_TEST'),
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
@@ -144,6 +156,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Djoser auth
+
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'accounts/password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'accounts/username/reset/confirm/{uid}/{token}',
@@ -154,6 +167,7 @@ DJOSER = {
 }
 
 # DRF settings
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -166,19 +180,22 @@ REST_FRAMEWORK = {
 }
 
 # Email
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'mega.app.project.2020@gmail.com'
-EMAIL_HOST_PASSWORD = 'MegaApp$'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # CORS
+
 CORS_ALLOWED_ORIGINS = [
     'http://0.0.0.0:9000',
     'https://mega-app-project.herokuapp.com'
 ]
 
-# accounts
+# Accounts
+
 LOGOUT_REDIRECT_URL='accounts:login'
 LOGIN_REDIRECT_URL = 'developer:index'
