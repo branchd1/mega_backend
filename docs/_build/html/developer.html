@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>developer package &#8212; Mega Backend Documentation 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="developer-package">
+<h1>developer package<a class="headerlink" href="#developer-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer.migrations.html">developer.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer.migrations.html#module-developer.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-developer.admin">
+<span id="developer-admin-module"></span><h2>developer.admin module<a class="headerlink" href="#module-developer.admin" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-developer.apps">
+<span id="developer-apps-module"></span><h2>developer.apps module<a class="headerlink" href="#module-developer.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="developer.apps.DeveloperConfig">
+<em class="property">class </em><code class="sig-prename descclassname">developer.apps.</code><code class="sig-name descname">DeveloperConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app_name</span></em>, <em class="sig-param"><span class="n">app_module</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.apps.DeveloperConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.config.AppConfig</span></code></p>
+<dl class="py attribute">
+<dt id="developer.apps.DeveloperConfig.name">
+<code class="sig-name descname">name</code><em class="property"> = 'developer'</em><a class="headerlink" href="#developer.apps.DeveloperConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-developer.forms">
+<span id="developer-forms-module"></span><h2>developer.forms module<a class="headerlink" href="#module-developer.forms" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="developer.forms.FeatureForm">
+<em class="property">class </em><code class="sig-prename descclassname">developer.forms.</code><code class="sig-name descname">FeatureForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.forms.FeatureForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dl class="py class">
+<dt id="developer.forms.FeatureForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#developer.forms.FeatureForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="developer.forms.FeatureForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ['name', 'picture', 'description', 'payload']</em><a class="headerlink" href="#developer.forms.FeatureForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="developer.forms.FeatureForm.Meta.labels">
+<code class="sig-name descname">labels</code><em class="property"> = {'description': 'description', 'name': 'feature name', 'payload': 'feature code', 'picture': 'feature picture'}</em><a class="headerlink" href="#developer.forms.FeatureForm.Meta.labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="developer.forms.FeatureForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#developer.forms.FeatureForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="core.html#core.models.Feature" title="core.models.Feature"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.models.Feature</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="developer.forms.FeatureForm.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {'description': &lt;django.forms.fields.CharField object&gt;, 'name': &lt;django.forms.fields.CharField object&gt;, 'payload': &lt;django.forms.fields.CharField object&gt;, 'picture': &lt;django.forms.fields.ImageField object&gt;}</em><a class="headerlink" href="#developer.forms.FeatureForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="developer.forms.FeatureForm.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {}</em><a class="headerlink" href="#developer.forms.FeatureForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="developer.forms.FeatureForm.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#developer.forms.FeatureForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-developer.models">
+<span id="developer-models-module"></span><h2>developer.models module<a class="headerlink" href="#module-developer.models" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-developer.tests">
+<span id="developer-tests-module"></span><h2>developer.tests module<a class="headerlink" href="#module-developer.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-developer.urls">
+<span id="developer-urls-module"></span><h2>developer.urls module<a class="headerlink" href="#module-developer.urls" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-developer.views">
+<span id="developer-views-module"></span><h2>developer.views module<a class="headerlink" href="#module-developer.views" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="developer.views.add_feature">
+<code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">add_feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.add_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>add feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="developer.views.edit_feature">
+<code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">edit_feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">feature_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.edit_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>edit feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="developer.views.feature_details">
+<code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">feature_details</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">feature_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.feature_details" title="Permalink to this definition">¶</a></dt>
+<dd><p>feature details page</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="developer.views.index">
+<code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>home page for developers</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-developer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-developer" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Mega Backend Documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Umakhihe Arnold.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/developer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
