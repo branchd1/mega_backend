@@ -1,3 +1,5 @@
+""" Tests for developer website related logic """
+
 from django.forms import model_to_dict
 from django.test import TestCase
 from core.models import Feature

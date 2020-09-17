@@ -1,3 +1,5 @@
+""" Tests for accounts related logic """
+
 from django.test import TestCase
 from django.urls import reverse
 from djoser.conf import User

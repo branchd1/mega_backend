@@ -1,3 +1,5 @@
+""" Tests for core logic """
+
 from django.test import TestCase
 from core.models import Feature, CommunityType, Community
 from core.views import FeatureViewSet, CommunityViewSet, \

@@ -1,3 +1,5 @@
+""" Views for account related logic """
+
 from core.permissions import IsOwner
 
 from rest_framework import viewsets, views
