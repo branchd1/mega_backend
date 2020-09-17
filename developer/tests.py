@@ -1,15 +1,9 @@
 from django.forms import model_to_dict
 from django.test import TestCase
-from django.test.client import MULTIPART_CONTENT
-
-from developer.views import index, feature_details, \
-    add_feature, edit_feature
-from developer.forms import FeatureForm
 from core.models import Feature
 from django.contrib.auth.models import User
 from django.test import Client
 from django.urls import reverse
-
 from django.conf import settings
 
 
