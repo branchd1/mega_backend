@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APIRequestFactory
 from rest_framework.test import force_authenticate
 from django.urls import reverse
+from django.conf import settings
 
 
 # Tests here
@@ -16,14 +17,24 @@ class FeatureModelTestCase(TestCase):
 
     def setUp(self) -> None:
         self.user = User.objects.create_user(username='alice', password="alice2$$$")
-        self.test_feature = Feature.objects.create(name='test', description='', picture='', payload='', user=self.user)
-        self.test_feature_1 = Feature.objects.create(name='test', description='', picture='', payload='',
+        self.test_feature = Feature.objects.create(name='test', description='',
+                                                   picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                   payload='', user=self.user)
+        self.test_feature_1 = Feature.objects.create(name='test', description='',
+                                                     picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                     payload='',
                                                      user=self.user)
-        self.test_feature_2 = Feature.objects.create(name='test', description='', picture='', payload='',
+        self.test_feature_2 = Feature.objects.create(name='test', description='',
+                                                     picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                     payload='',
                                                      user=self.user)
-        self.test_feature_3 = Feature.objects.create(name='test', description='', picture='', payload='',
+        self.test_feature_3 = Feature.objects.create(name='test', description='',
+                                                     picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                     payload='',
                                                      user=self.user)
-        self.test_feature_4 = Feature.objects.create(name='test', description='', picture='', payload='',
+        self.test_feature_4 = Feature.objects.create(name='test', description='',
+                                                     picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                     payload='',
                                                      user=self.user)
 
     def test_feature_key_is_unique(self) -> None:
@@ -46,15 +57,20 @@ class CommunityModelTestCase(TestCase):
         self.restaurant_type = CommunityType.objects.create(value='restaurant')
 
         self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-                                                       picture='', description='')
+                                                       picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                       description='')
         self.test_community_1 = Community.objects.create(name='test1', type=self.restaurant_type,
-                                                         picture='', description='')
+                                                         picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                         description='')
         self.test_community_2 = Community.objects.create(name='test2', type=self.restaurant_type,
-                                                         picture='', description='')
+                                                         picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                         description='')
         self.test_community_3 = Community.objects.create(name='test3', type=self.restaurant_type,
-                                                         picture='', description='')
+                                                         picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                         description='')
         self.test_community_4 = Community.objects.create(name='test4', type=self.restaurant_type,
-                                                         picture='', description='')
+                                                         picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                         description='')
 
         self.test_community.admins.add(self.admin_user)
         self.test_community.members.add(self.member_user)
@@ -93,11 +109,14 @@ class FeatureViewTestCase(TestCase):
         self.user = User.objects.create_user(username='alice', password="alice2$$$")
         self.restaurant_type = CommunityType.objects.create(value='restaurant')
         self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-                                                       picture='', description='')
+                                                       picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                       description='')
         self.test_feature = Feature.objects.create(name='test', description='',
-                                                   picture='', payload='', user=self.user, approved=True)
+                                                   picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                   payload='', user=self.user, approved=True)
         self.test_feature_2 = Feature.objects.create(name='test2', description='',
-                                                     picture='', payload='', user=self.user, approved=True)
+                                                     picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                     payload='', user=self.user, approved=True)
 
         self.test_community.features.add(self.test_feature)
         self.test_community.admins.add(self.user)
@@ -136,13 +155,17 @@ class CommunityViewTestCase(TestCase):
         self.user = User.objects.create_user(username='alice', password="alice2$$$")
         self.restaurant_type = CommunityType.objects.create(value='restaurant')
         self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-                                                       picture='', description='')
+                                                       picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                       description='')
         self.test_community_2 = Community.objects.create(name='test2', type=self.restaurant_type,
-                                                         picture='', description='')
+                                                         picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                         description='')
         self.test_community_3 = Community.objects.create(name='test3', type=self.restaurant_type,
-                                                         picture='', description='')
+                                                         picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                         description='')
         self.test_community_4 = Community.objects.create(name='test4', type=self.restaurant_type,
-                                                         picture='', description='')
+                                                         picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                         description='')
         self.test_community.admins.add(self.user)
         self.test_community_2.members.add(self.user)
 
@@ -219,7 +242,8 @@ class JoinCommunityTestCase(TestCase):
         self.user = User.objects.create_user(username='alice', password="alice2$$$")
         self.restaurant_type = CommunityType.objects.create(value='restaurant')
         self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-                                                       picture='', description='')
+                                                       picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                       description='')
 
     def test_join_community(self) -> None:
         """ Check that joining a community works smoothly """
@@ -263,7 +287,8 @@ class LeaveCommunityTestCase(TestCase):
         self.user = User.objects.create_user(username='alice', password="alice2$$$")
         self.restaurant_type = CommunityType.objects.create(value='restaurant')
         self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-                                                       picture='', description='')
+                                                       picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                       description='')
 
         self.test_community.members.add(self.user)
 
@@ -310,8 +335,11 @@ class RemoveFeatureTestCase(TestCase):
         self.restaurant_type = CommunityType.objects.create(value='restaurant')
 
         self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-                                                       picture='', description='')
-        self.test_feature = Feature.objects.create(name='test', description='', picture='', payload='', user=self.user)
+                                                       picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                       description='')
+        self.test_feature = Feature.objects.create(name='test', description='',
+                                                   picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                   payload='', user=self.user)
 
         self.test_community.features.add(self.test_feature)
         self.test_community.admins.add(self.user)
@@ -364,8 +392,11 @@ class AddFeatureToCommunityTestCase(TestCase):
         self.restaurant_type = CommunityType.objects.create(value='restaurant')
 
         self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-                                                       picture='', description='')
-        self.test_feature = Feature.objects.create(name='test', description='', picture='', payload='', user=self.user)
+                                                       picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                       description='')
+        self.test_feature = Feature.objects.create(name='test', description='',
+                                                   picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png',
+                                                   payload='', user=self.user)
 
         self.test_community.admins.add(self.user)
 
@@ -427,8 +458,8 @@ class DataStoreTestCase(TestCase):
     #     self.restaurant_type = CommunityType.objects.create(value='restaurant')
     #
     #     self.test_community = Community.objects.create(name='test', type=self.restaurant_type,
-    #                                                    picture='', description='')
-    #     self.test_feature = Feature.objects.create(name='test', description='', picture='', payload='', user=self.user)
+    #                                                    picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png', description='')
+    #     self.test_feature = Feature.objects.create(name='test', description='', picture=settings.BASE_DIR + settings.MEDIA_URL + 'dummy.png', payload='', user=self.user)
     #
     #     self.test_community.features.add(self.test_feature)
     #     self.test_community.admins.add(self.user)

@@ -13,7 +13,19 @@ from developer.forms import FeatureForm
 
 @login_required
 def index(request):
-    """ home page for developers """
+    """
+    Home page view for developers
+
+    Parameters
+    ----------
+    request
+
+    Returns
+    -------
+    object
+        Http response object
+
+    """
     _features = request.user.features.all()
 
     ctx = {
@@ -40,7 +52,7 @@ def feature_details(request, feature_id):
 
 @login_required
 def add_feature(request):
-    """ add feature """
+    """ Add feature """
     _feature_form = None
 
     if request.method == 'POST':

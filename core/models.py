@@ -77,7 +77,7 @@ class Feature(models.Model):
     """
 
     name = models.CharField(max_length=32)
-    picture = models.ImageField(upload_to='feature_pictures/')
+    picture = models.ImageField(upload_to='feature_pictures/', null=True)
     description = models.TextField()
     key = models.CharField(max_length=10, unique=True)
     payload = models.TextField()
