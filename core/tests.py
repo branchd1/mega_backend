@@ -1,14 +1,15 @@
 from django.test import TestCase
-from core.models import Feature, CommunityType, Community, SimpleStore
+from core.models import Feature, CommunityType, Community
 from core.views import FeatureViewSet, CommunityViewSet, \
     CheckEmail, JoinCommunity, LeaveCommunity, RemoveFeature, \
-    AddFeatureToCommunity, DataStore, DataAccessType
+    AddFeatureToCommunity
 from django.contrib.auth.models import User
 from rest_framework.test import APIRequestFactory
 from rest_framework.test import force_authenticate
 
 
-# Create your tests here.
+# Tests here
+
 class FeatureModelTestCase(TestCase):
     """ Test Feature Model """
 
