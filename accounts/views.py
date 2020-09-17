@@ -10,8 +10,6 @@ from accounts.models import Profile
 
 from rest_framework.parsers import MultiPartParser
 
-from django.contrib.auth.models import User
-
 
 # Create your views here.
 class ProfileViewSet(viewsets.ModelViewSet):

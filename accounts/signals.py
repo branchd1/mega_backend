@@ -7,19 +7,60 @@ from accounts.models import Profile
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
-    """ create a profile for every user """
+    """
+    Create a profile for every user
+
+    Parameters
+    ----------
+    sender
+    instance
+    created
+    kwargs
+
+    Returns
+    -------
+    None
+
+    """
     if created:
         Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
+    """
+    Update profile when user is updated
+
+    Parameters
+    ----------
+    sender
+    instance
+    kwargs
+
+    Returns
+    -------
+    None
+
+    """
     instance.profile.save()
 
 
 @receiver(pre_save, sender=User)
 def save_username(sender, instance, **kwargs):
-    """ modify username """
+    """
+    Set username when user is created
+
+    Parameters
+    ----------
+    sender
+    instance
+    kwargs
+
+    Returns
+    -------
+    None
+
+    """
     if instance.username is None:
         # username equal email always
         instance.username = instance.email

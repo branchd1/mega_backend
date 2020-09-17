@@ -1,3 +1,5 @@
+""" This module contains accounts related URLs and the associates them with the appropriate views """
+
 from django.urls import path, reverse_lazy
 
 from django.contrib.auth import views as auth_views

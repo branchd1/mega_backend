@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class FeatureForm(forms.ModelForm):
+    """ Form for creating and editing feature """
     class Meta:
         model = Feature
         fields = ['name', 'picture', 'description', 'payload']

@@ -1,3 +1,8 @@
+"""
+This module specifies the developer website URLs and determines what views to match with them
+
+"""
+
 from django.urls import path
 
 from developer import views
