@@ -6,6 +6,7 @@ from core.views import FeatureViewSet, CommunityViewSet, \
 from django.contrib.auth.models import User
 from rest_framework.test import APIRequestFactory
 from rest_framework.test import force_authenticate
+from django.urls import reverse
 
 
 # Tests here
@@ -104,7 +105,7 @@ class FeatureViewTestCase(TestCase):
     def test_feature_queryset_is_accurate(self) -> None:
         """ Check that features returned by get_queryset method are the correct features """
         factory = APIRequestFactory()
-        request = factory.get('check-email/', {'community': self.test_community.id}, format='json')
+        request = factory.get(reverse('core:check_email'), {'community': self.test_community.id}, format='json')
 
         view = FeatureViewSet.as_view(actions={'get': 'list'})
         response = view(request)
@@ -116,13 +117,13 @@ class FeatureViewTestCase(TestCase):
         # assert the accurate feature is returned in an authenticated request
         self.assertEqual(response.data[0]['id'], self.test_feature.id)
 
-        request_2 = factory.get('check-email/', {'all': 'true'}, format='json')
+        request_2 = factory.get(reverse('core:check_email'), {'all': 'true'}, format='json')
         response_2 = view(request_2)
         # assert the accurate feature is when all features are requested
         self.assertEqual(response_2.data[0]['id'], self.test_feature.id)
         self.assertEqual(response_2.data[1]['id'], self.test_feature_2.id)
 
-        request_3 = factory.get('check-email/', {'all': 'true', 'community': self.test_community.id}, format='json')
+        request_3 = factory.get(reverse('core:check_email'), {'all': 'true', 'community': self.test_community.id}, format='json')
         response_3 = view(request_3)
         # assert the accurate feature is when all unused features are requested
         self.assertEqual(response_3.data[0]['id'], self.test_feature_2.id)
@@ -148,7 +149,7 @@ class CommunityViewTestCase(TestCase):
     def test_community_perform_create(self) -> None:
         """ Check that the CommunityViewSet perform_create function works accurately """
         factory = APIRequestFactory()
-        request = factory.post('communities/',
+        request = factory.post(reverse('community-list'),
                                {'name': 'test',
                                 'type': self.restaurant_type.id,
                                 },
@@ -166,7 +167,7 @@ class CommunityViewTestCase(TestCase):
     def test_community_queryset_is_accurate(self):
         """ Check that communities returned by get_queryset method are correct """
         factory = APIRequestFactory()
-        request = factory.get('communities/')
+        request = factory.get(reverse('community-list'))
 
         force_authenticate(request, user=self.user)
         view = CommunityViewSet.as_view(actions={'get': 'list'})
@@ -196,14 +197,14 @@ class CheckEmailViewTestCase(TestCase):
         """ Check that the view returns true if email exists in database and false otherwise """
         factory = APIRequestFactory()
 
-        request = factory.post('check-email/', {'email': 'alice@yahoo.com'}, format='json')
+        request = factory.post(reverse('core:check_email'), {'email': 'alice@yahoo.com'}, format='json')
         force_authenticate(request, user=self.user)
         view = CheckEmail.as_view()
         response = view(request)
         # assert that the email existed in the database
         self.assertTrue(response.data['exists'])
 
-        request_2 = factory.post('check-email/', {'email': 'aooo@yahoo.com'}, format='json')
+        request_2 = factory.post(reverse('core:check_email'), {'email': 'aooo@yahoo.com'}, format='json')
         force_authenticate(request_2, user=self.user)
         view_2 = CheckEmail.as_view()
         response_2 = view_2(request_2)
@@ -224,7 +225,7 @@ class JoinCommunityTestCase(TestCase):
         """ Check that joining a community works smoothly """
         factory = APIRequestFactory()
 
-        request = factory.post('communities/join/', {'key': self.test_community.key}, format='json')
+        request = factory.post(reverse('core:join_community'), {'key': self.test_community.key}, format='json')
         force_authenticate(request, user=self.user)
         view = JoinCommunity.as_view()
         view(request)
@@ -235,7 +236,7 @@ class JoinCommunityTestCase(TestCase):
         """ Check that joining a community errors properly """
         factory = APIRequestFactory()
         # try with the wrong key
-        request_2 = factory.post('communities/join/', {'key': 'wrong_key'}, format='json')
+        request_2 = factory.post(reverse('core:join_community'), {'key': 'wrong_key'}, format='json')
         force_authenticate(request_2, user=self.user)
         view_2 = JoinCommunity.as_view()
         response_2 = view_2(request_2)
@@ -245,7 +246,7 @@ class JoinCommunityTestCase(TestCase):
         self.assertNotIn(self.user, self.test_community.members.all())
 
         # try without key
-        request_3 = factory.post('communities/join/')
+        request_3 = factory.post(reverse('core:join_community'))
         force_authenticate(request_3, user=self.user)
         view_3 = JoinCommunity.as_view()
         response_3 = view_3(request_3)
@@ -270,7 +271,7 @@ class LeaveCommunityTestCase(TestCase):
         """ Check that leaving a community works smoothly """
         factory = APIRequestFactory()
 
-        request = factory.post('communities/leave/', {'community': self.test_community.pk}, format='json')
+        request = factory.post(reverse('core:leave_community'), {'community': self.test_community.pk}, format='json')
         force_authenticate(request, user=self.user)
         view = LeaveCommunity.as_view()
         view(request)
@@ -281,7 +282,7 @@ class LeaveCommunityTestCase(TestCase):
         """ Check that leaving a community errors properly """
         factory = APIRequestFactory()
         # try with the wrong community id - using some random number
-        request_2 = factory.post('communities/leave/', {'community': '83292898328382893'}, format='json')
+        request_2 = factory.post(reverse('core:leave_community'), {'community': '83292898328382893'}, format='json')
         force_authenticate(request_2, user=self.user)
         view_2 = LeaveCommunity.as_view()
         response_2 = view_2(request_2)
@@ -291,7 +292,7 @@ class LeaveCommunityTestCase(TestCase):
         self.assertIn(self.user, self.test_community.members.all())
 
         # try without community
-        request_3 = factory.post('communities/leave/')
+        request_3 = factory.post(reverse('core:leave_community'))
         force_authenticate(request_3, user=self.user)
         view_3 = LeaveCommunity.as_view()
         response_3 = view_3(request_3)
@@ -319,7 +320,7 @@ class RemoveFeatureTestCase(TestCase):
         """ Check that removing a feature from a community works smoothly """
         factory = APIRequestFactory()
 
-        request = factory.post('features/remove/',
+        request = factory.post(reverse('core:remove_feature'),
                                {'community': self.test_community.pk, 'feature': self.test_feature.pk},
                                format='json')
         force_authenticate(request, user=self.user)
@@ -333,7 +334,7 @@ class RemoveFeatureTestCase(TestCase):
         factory = APIRequestFactory()
 
         # try with the wrong community id - using some random number
-        request_2 = factory.post('features/remove/',
+        request_2 = factory.post(reverse('core:remove_feature'),
                                  {'community': '83292898328382893', 'feature': '29893893'},
                                  format='json')
         force_authenticate(request_2, user=self.user)
@@ -345,7 +346,7 @@ class RemoveFeatureTestCase(TestCase):
         self.assertIn(self.test_feature, self.test_community.features.all())
 
         # try without community
-        request_3 = factory.post('features/remove/')
+        request_3 = factory.post(reverse('core:remove_feature'))
         force_authenticate(request_3, user=self.user)
         view_3 = RemoveFeature.as_view()
         response_3 = view_3(request_3)
@@ -372,7 +373,7 @@ class AddFeatureToCommunityTestCase(TestCase):
         """ Check that adding a feature to a community works smoothly """
         factory = APIRequestFactory()
 
-        request = factory.post('features/add-to-community/',
+        request = factory.post(reverse('core:add_feature_to_community'),
                                {'community': self.test_community.pk, 'feature': self.test_feature.pk},
                                format='json')
         force_authenticate(request, user=self.user)
@@ -386,7 +387,7 @@ class AddFeatureToCommunityTestCase(TestCase):
         factory = APIRequestFactory()
 
         # try with the wrong community id - using some random number
-        request_2 = factory.post('features/add-to-community/',
+        request_2 = factory.post(reverse('core:add_feature_to_community'),
                                  {'community': '83292898328382893', 'feature': '29893893'},
                                  format='json')
         force_authenticate(request_2, user=self.user)
@@ -398,7 +399,7 @@ class AddFeatureToCommunityTestCase(TestCase):
         self.assertNotIn(self.test_feature, self.test_community.features.all())
 
         # try without community
-        request_3 = factory.post('features/add-to-community/')
+        request_3 = factory.post(reverse('core:add_feature_to_community'))
         force_authenticate(request_3, user=self.user)
         view_3 = AddFeatureToCommunity.as_view()
         response_3 = view_3(request_3)
@@ -446,7 +447,7 @@ class DataStoreTestCase(TestCase):
     #     """ Check that get request returns the appropriate SimpleStore objects """
     #     factory = APIRequestFactory()
     #
-    #     request = factory.post('data-store/',
+    #     request = factory.post(reverse('core:data_store'),
     #                            {'mega$tag': 'test',
     #                             'mega$community': self.test_community.pk,
     #                             'mega$feature': self.test_feature.pk},
