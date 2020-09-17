@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'jsonfield',
     'django.contrib.sites',
     'corsheaders',
+    'django_nose',
 ]
 
 SITE_ID = 1
@@ -196,3 +197,14 @@ CORS_ALLOWED_ORIGINS = [
 
 LOGOUT_REDIRECT_URL='accounts:login'
 LOGIN_REDIRECT_URL = 'developer:index'
+
+# Tests
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=core,accounts,developer',
+]
