@@ -13,7 +13,7 @@ from rest_framework.parsers import MultiPartParser
 
 # Create your views here.
 class ProfileViewSet(viewsets.ModelViewSet):
-    """ profile view set """
+    """ Profile view set containing profile views """
     serializer_class = ProfileSerializer
     permission_classes = [IsOwner]
     parser_classes = (MultiPartParser,)
@@ -24,7 +24,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 
 class SpecialUserView(views.APIView):
-    """ user view """
+    """ Custom user views """
 
     def get(self, request):
         _user_serializer = SpecialUserSerializer(request.user)

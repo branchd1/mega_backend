@@ -61,6 +61,7 @@ def save_username(sender, instance, **kwargs):
     None
 
     """
-    if instance.username is None:
+    if instance.username == '':
         # username equal email always
         instance.username = instance.email
+        instance.save()
