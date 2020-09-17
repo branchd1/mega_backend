@@ -1,6 +1,8 @@
+""" This module is used to register models in the built in Django admin console """
+
 from django.contrib import admin
 
-from .models import Community, Feature, SimpleStore, UploadedImage, CommunityType
+from core.models import Community, Feature, SimpleStore, UploadedImage, CommunityType
 
 # Register models
 

@@ -1,3 +1,5 @@
+""" This module contains the core views in the backend """
+
 from rest_framework import viewsets, views
 
 from rest_framework.response import Response
@@ -10,7 +12,7 @@ from core.models import Community, Feature, DataAccessType, SimpleStore, Uploade
 
 from django.contrib.auth.models import User
 
-from django.db.models import Q, BooleanField, Value
+from django.db.models import BooleanField, Value
 
 from itertools import chain
 
@@ -19,34 +21,82 @@ from rest_framework.parsers import MultiPartParser
 from django.contrib.sites.models import Site
 
 
-# Views here
+# Helper functions
+
+def filter_stores_by_access(store, user):
+    """
+    Check if the current user has the appropriate permission to access the store
+
+    Parameters
+    ----------
+    store : SimpleStore
+        The store object
+    user : User
+        The user who sent the request
+
+    Returns
+    -------
+    object
+        The store object if the user has the permission, None otherwise
+
+    """
+    if store.access == DataAccessType.USER:
+        if store.user == user:
+            return store
+        return None
+    elif store.access == DataAccessType.COMMUNITY:
+        if store.is_admin_or_member(user):
+            return store
+        return None
+    elif store.access == DataAccessType.ADMIN:
+        if store.is_admin(user) or store.user == user:
+            return store
+        return None
+
+
+# Views
 
 class FeatureViewSet(viewsets.ModelViewSet):
-    """ feature view set """
+    """Feature view set
+
+    Contains API views to perform CRUD operation on Features
+
+    """
     serializer_class = my_serializers.FeatureSerializer
-    permission_classes = []
 
     def get_queryset(self):
+        # get user
         _user = self.request.user
+
+        # get the community id from GET params
         _community_id = self.request.GET.get('community')
+
+        # check if all features are being queried for
         _all_features = self.request.GET.get('all')
 
         if _all_features:
+            # if all features are being queried for,
             try:
                 _community = Community.objects.get(id=_community_id)
             except Community.DoesNotExist:
-                return None
+                _queryset = Feature.objects.filter(approved=True)
+                return _queryset
             used_features_id = _community.features.all().values('id')
+
+            # return all approved features excluding features that have been used in this community
             _queryset = Feature.objects.filter(approved=True).exclude(id__in=used_features_id)
             return _queryset
 
         if _community_id:
+            # if there is a community id
             try:
                 _community = Community.objects.get(id=_community_id)
             except Community.DoesNotExist:
                 return None
             if not _community.is_admin_or_member(_user):
                 return None
+
+            # return features that are in the community and approved
             _queryset = _community.features.filter(approved=True)
             return _queryset
 
@@ -54,38 +104,56 @@ class FeatureViewSet(viewsets.ModelViewSet):
 
 
 class CommunityTypeViewSet(viewsets.ModelViewSet):
-    """ community type view set """
+    """CommunityType view set
+
+    Contains API views to perform CRUD operation on Community types
+
+    """
     serializer_class = my_serializers.CommunityTypeSerializer
     queryset = CommunityType.objects.all()
 
 
 class CommunityViewSet(viewsets.ModelViewSet):
-    """ community view set """
+    """Community view set
+
+    Contains API views to perform CRUD operation on Communities
+
+    """
     serializer_class = my_serializers.CommunitySerializer
     permission_classes = [IsOwner]
     parser_classes = (MultiPartParser,)
 
     def perform_create(self, serializer):
+        # get the object representing the community type
         _community_type = CommunityType.objects.get(value=serializer.validated_data['type'])
-        print(_community_type.value)
         community = serializer.save()
+
+        # add the creator to the list of admins
         community.admins.add(self.request.user)
 
     def get_queryset(self):
-        """ return current user communities only """
+        # return the current user communities only
         _user = self.request.user
+
+        # add "is_admin" field to result,
+        # so that the frontend can know which communities the user is an admin or just a member
         _queryset1 = Community.objects.filter(admins__id__contains=_user.pk).distinct().annotate(
             is_admin=Value(True, output_field=BooleanField()))
         _queryset2 = Community.objects.filter(members__id__contains=_user.pk).distinct().annotate(
             is_admin=Value(False, output_field=BooleanField()))
 
+        # join queryset of communities where current user is admin and member together
         _queryset = list(chain(_queryset1, _queryset2))
 
         return _queryset
 
 
 class CheckEmail(views.APIView):
-    """ checks if an email exists """
+    """Check Email View
+
+    Checks if an email exists
+
+    """
 
     def post(self, request):
         email = request.data.get('email')
@@ -110,7 +178,11 @@ class CheckEmail(views.APIView):
 
 
 class JoinCommunity(views.APIView):
-    """ checks if an email exists """
+    """Join Community View
+
+    Join a community
+
+    """
 
     def post(self, request):
         _key = request.data.get('key')
@@ -119,13 +191,16 @@ class JoinCommunity(views.APIView):
             try:
                 _community = Community.objects.get(key=_key)
             except Community.DoesNotExist:
-                # email has not been used
+                # community does not exist
                 _response_dict = {
                     'key': 'Incorrect key'
                 }
                 return Response(_response_dict, status=400)
-            # email has been used
-            _community.members.add(request.user)
+
+            # add user to community members, if not already a member
+            if request.user not in _community.members.all():
+                _community.members.add(request.user)
+
             return Response({})
         else:
             _response_dict = {
@@ -135,11 +210,12 @@ class JoinCommunity(views.APIView):
 
 
 class LeaveCommunity(views.APIView):
-    """ leave a community """
+    """ Leave a community """
 
     def post(self, request):
         _community_pk = request.data.get('community')
         if _community_pk:
+            # if there was a community
             _response_dict = None
             try:
                 _community = Community.objects.get(pk=_community_pk)
@@ -148,9 +224,12 @@ class LeaveCommunity(views.APIView):
                     'community': 'Community does not exist'
                 }
                 return Response(_response_dict, status=400)
-            _community.members.remove(request.user)
+            # check user is in community then remove
+            if request.user in _community.members.all():
+                _community.members.remove(request.user)
             return Response({})
         else:
+            # if there wasn't a community
             _response_dict = {
                 'community': 'Enter a community'
             }
@@ -158,7 +237,7 @@ class LeaveCommunity(views.APIView):
 
 
 class RemoveFeature(views.APIView):
-    """ remove feature from community """
+    """ Remove a feature from community """
 
     def post(self, request):
         _community_pk = request.data.get('community')
@@ -182,7 +261,9 @@ class RemoveFeature(views.APIView):
                 }
                 return Response(_response_dict, status=400)
 
-            _community.features.remove(_feature)
+            # check user is admin before removing
+            if _community.is_admin(request.user):
+                _community.features.remove(_feature)
 
             return Response({})
         elif _community_pk is None:
@@ -198,7 +279,7 @@ class RemoveFeature(views.APIView):
 
 
 class AddFeatureToCommunity(views.APIView):
-    """ add a feature to a community """
+    """ Add a feature to a community """
 
     def post(self, request):
         _community_id = request.data.get('community')
@@ -206,13 +287,21 @@ class AddFeatureToCommunity(views.APIView):
 
         if not _community_id:
             _response_dict = {
-                'community': 'Pick a community'
+                'community': 'Enter a community'
             }
             return Response(_response_dict, status=400)
 
         if not _feature_id:
             _response_dict = {
-                'feature': 'Pick a feature'
+                'feature': 'Enter a feature'
+            }
+            return Response(_response_dict, status=400)
+
+        try:
+            _community = Community.objects.get(id=_community_id)
+        except Community.DoesNotExist:
+            _response_dict = {
+                'community': 'Community does not exist'
             }
             return Response(_response_dict, status=400)
 
@@ -220,15 +309,7 @@ class AddFeatureToCommunity(views.APIView):
             _feature = Feature.objects.get(id=_feature_id)
         except Feature.DoesNotExist:
             _response_dict = {
-                'feature': 'Invalid feature'
-            }
-            return Response(_response_dict, status=400)
-
-        try:
-            _community = Community.objects.get(id=_community_id)
-        except Feature.DoesNotExist:
-            _response_dict = {
-                'community': 'Invalid community'
+                'feature': 'Feature does not exist'
             }
             return Response(_response_dict, status=400)
 
@@ -238,7 +319,7 @@ class AddFeatureToCommunity(views.APIView):
 
 
 class DataStore(views.APIView):
-    """ stores data sent """
+    """ Data Store API views """
 
     def get(self, request):
         _tag = request.GET.get('mega$tag')
@@ -300,9 +381,6 @@ class DataStore(views.APIView):
 
         return Response({}, status=201)
 
-
-class DataStoreDelete(views.APIView):
-    """ delete data from store """
     def delete(self, request, store_id):
         _no_access_response_dict = {
             'access': 'User does not have access to delete'
@@ -341,19 +419,3 @@ class UploadImage(views.APIView):
 
         # remove hardcoded 'http://'
         return Response({'url': 'http://' + current_site.domain + uploaded_image.image.url})
-
-
-# helper functions
-def filter_stores_by_access(store, user):
-    if store.access == DataAccessType.USER:
-        if store.user == user:
-            return store
-        return None
-    elif store.access == DataAccessType.COMMUNITY:
-        if store.is_admin_or_member(user):
-            return store
-        return None
-    elif store.access == DataAccessType.ADMIN:
-        if store.is_admin(user):
-            return store
-        return None

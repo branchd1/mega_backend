@@ -88,15 +88,12 @@ WSGI_APPLICATION = 'mega_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if 'test' in sys.argv:
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    # use SQLite database for tests
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DB_NAME_TEST'),
-            'USER': os.environ.get('DB_USER_TEST'),
-            'PASSWORD': os.environ.get('DB_PASSWORD_TEST'),
-            'HOST': os.environ.get('DB_HOST_TEST'),
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 else:

@@ -1,40 +1,46 @@
+"""
+This module contains Serializer classes for models.
+These classes determine how model object should be serialized.
+
+"""
+
 from rest_framework import serializers
 
-from . import models as my_models
+from core.models import Community, Feature, SimpleStore, CommunityType
 
 
 # Serializers
 
 class FeatureSerializer(serializers.ModelSerializer):
-    """ Serialize feature """
+    """ Serialize Feature model """
     class Meta:
-        model = my_models.Feature
+        model = Feature
         fields = '__all__'
         read_only_fields = ['id']
 
 
 class CommunitySerializer(serializers.ModelSerializer):
-    """ Serialize community """
+    """ Serialize Community model """
     is_admin = serializers.BooleanField(read_only=True)
     type_value = serializers.CharField(source='get_community_type_value', read_only=True)
 
     class Meta:
-        model = my_models.Community
+        model = Community
         read_only_fields = ['id', 'key']
         exclude = ['admins', 'features', 'members']
 
 
 class SimpleStoreSerializer(serializers.ModelSerializer):
-    """ Serialize simple store """
+    """ Serialize SimpleStore model """
     class Meta:
-        model = my_models.SimpleStore
+        model = SimpleStore
         fields = ['id', 'key', 'value']
         read_only_fields = ['id']
 
 
 class CommunityTypeSerializer(serializers.ModelSerializer):
-    """ Serialize community type """
+    """ Serialize CommunityType model """
     class Meta:
-        model = my_models.CommunityType
+        model = CommunityType
         fields = '__all__'
         read_only_fields = ['id']
