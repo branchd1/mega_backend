@@ -415,7 +415,8 @@ class DataStoreTestCase(TestCase):
     Notes
     -----
     Implementation commented because it can only be tested with a Postgres database
-    because the model uses a Postgres only field. It was tested manually.
+    because the model uses a Postgres only field. It was tested manually. Due to Heroku
+    free Postgres server limitation, the test database is SQLite.
 
     """
 
