@@ -16,10 +16,6 @@ a:hover{
     width: 18rem;
 }
 
-a.card:hover{
-    background-color: lightgrey;
-}
-
 .border-dashed{
     border: 4px dashed grey;
 }
