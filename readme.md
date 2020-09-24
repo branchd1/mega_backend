@@ -55,11 +55,11 @@ The instructions to write feature code are
 also available there.
 
 ## API endpoints
-The API endpoints can be found in the documentation.
+The API endpoints can be found in the **documentation**.
 
 ## Documentation
 Documentation homepage can be found in 
-docs/_build/html/index.html
+**docs/_build/html/index.html**
 
  
     
