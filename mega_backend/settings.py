@@ -159,14 +159,14 @@ if not DEBUG:
     # s3 static settings
     STATIC_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-    STATICFILES_STORAGE = 'mega_backend.storage_backends.StaticStorage'
+    STATICFILES_STORAGE = 'my_storages.storage_backends.StaticStorage'
     # s3 public media settings
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'mega_backend.storage_backends.PublicMediaStorage'
+    DEFAULT_FILE_STORAGE = 'my_storages.storage_backends.PublicMediaStorage'
     # s3 private media settings
     PRIVATE_MEDIA_LOCATION = 'private'
-    PRIVATE_FILE_STORAGE = 'mega_backend.storage_backends.PrivateMediaStorage'
+    PRIVATE_FILE_STORAGE = 'my_storages.storage_backends.PrivateMediaStorage'
 else:
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
