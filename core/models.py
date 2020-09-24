@@ -82,7 +82,7 @@ class Feature(models.Model):
     key = models.CharField(max_length=10, unique=True)
     payload = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='features')
-    approved = models.NullBooleanField()
+    approved = models.NullBooleanField(default=True)  # TODO: change default to false in further work
 
     class Meta:
         ordering = ['id']
