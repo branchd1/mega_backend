@@ -16,6 +16,8 @@ from developer import urls as developer_urls
 from django.conf.urls.static import static
 from django.conf import settings
 
+from django.views.generic import RedirectView
+
 # DRF router configuration
 
 api_router = routers.DefaultRouter()
@@ -34,6 +36,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls.authtoken')),
     path('accounts/', include(accounts_urls)),
     path('developer/', include(developer_urls)),
+    path('favicon.ico', RedirectView.as_view(url='/static/core/img/favicon.ico')),
 ]
 
 if settings.DEBUG:
