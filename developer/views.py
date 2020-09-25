@@ -158,8 +158,5 @@ def delete_feature(request, feature_id):
         _feature = Feature.objects.get(pk=feature_id)
     except Feature.DoesNotExist:
         return redirect('developer:index')
-
-    if request.method == 'POST':
-        _feature.delete()
-        return redirect(reverse('developer:index'))
-    return redirect(reverse('developer:feature_details', kwargs={'feature_id': _feature.id}))
+    _feature.delete()
+    return redirect(reverse('developer:index'))
