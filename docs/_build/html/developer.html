@@ -70,6 +70,7 @@
 <dt id="developer.forms.FeatureForm">
 <em class="property">class </em><code class="sig-prename descclassname">developer.forms.</code><code class="sig-name descname">FeatureForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.forms.FeatureForm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<p>Form for creating and editing feature</p>
 <dl class="py class">
 <dt id="developer.forms.FeatureForm.Meta">
 <em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#developer.forms.FeatureForm.Meta" title="Permalink to this definition">¶</a></dt>
@@ -116,39 +117,173 @@
 </div>
 <div class="section" id="module-developer.tests">
 <span id="developer-tests-module"></span><h2>developer.tests module<a class="headerlink" href="#module-developer.tests" title="Permalink to this headline">¶</a></h2>
+<p>Tests for developer website related logic</p>
+<dl class="py class">
+<dt id="developer.tests.DeveloperWebTest">
+<em class="property">class </em><code class="sig-prename descclassname">developer.tests.</code><code class="sig-name descname">DeveloperWebTest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test the developers website</p>
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#developer.tests.DeveloperWebTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_accurate_feature_details_are_displayed">
+<code class="sig-name descname">test_accurate_feature_details_are_displayed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_accurate_feature_details_are_displayed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the correct feature details are displayed on the page</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_accurate_features_are_displayed">
+<code class="sig-name descname">test_accurate_features_are_displayed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_accurate_features_are_displayed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the correct features are displayed on the page</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_add_feature_page_loads">
+<code class="sig-name descname">test_add_feature_page_loads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_add_feature_page_loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the add feature page loads</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_edit_feature_page_loads">
+<code class="sig-name descname">test_edit_feature_page_loads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_edit_feature_page_loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the edit feature page loads</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_feature_detail_page_loads">
+<code class="sig-name descname">test_feature_detail_page_loads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_feature_detail_page_loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the feature detail page loads</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_feature_is_created">
+<code class="sig-name descname">test_feature_is_created</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_feature_is_created" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the feature is created</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_feature_is_edited">
+<code class="sig-name descname">test_feature_is_edited</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_feature_is_edited" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the feature is edited</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="developer.tests.DeveloperWebTest.test_index_page_loads">
+<code class="sig-name descname">test_index_page_loads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#developer.tests.DeveloperWebTest.test_index_page_loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the index page loads</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-developer.urls">
 <span id="developer-urls-module"></span><h2>developer.urls module<a class="headerlink" href="#module-developer.urls" title="Permalink to this headline">¶</a></h2>
+<p>This module specifies the developer website URLs and determines what views to match with them</p>
 </div>
 <div class="section" id="module-developer.views">
 <span id="developer-views-module"></span><h2>developer.views module<a class="headerlink" href="#module-developer.views" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="developer.views.add_feature">
 <code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">add_feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.add_feature" title="Permalink to this definition">¶</a></dt>
-<dd><p>add feature</p>
+<dd><p>Add feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Http response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="developer.views.delete_feature">
+<code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">delete_feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">feature_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.delete_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – </p></li>
+<li><p><strong>feature_id</strong> (<em>int</em>) – The id of the feature</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Http response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="developer.views.edit_feature">
 <code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">edit_feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">feature_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.edit_feature" title="Permalink to this definition">¶</a></dt>
-<dd><p>edit feature</p>
+<dd><p>Edit feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – </p></li>
+<li><p><strong>feature_id</strong> (<em>int</em>) – The id of the feature</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Http response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="developer.views.feature_details">
 <code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">feature_details</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">feature_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.feature_details" title="Permalink to this definition">¶</a></dt>
-<dd><p>feature details page</p>
+<dd><p>Feature details page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – </p></li>
+<li><p><strong>feature_id</strong> (<em>int</em>) – The id of the feature</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Http response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="developer.views.index">
 <code class="sig-prename descclassname">developer.views.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#developer.views.index" title="Permalink to this definition">¶</a></dt>
-<dd><p>home page for developers</p>
+<dd><p>Home page view for developers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Http response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
 <div class="section" id="module-developer">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-developer" title="Permalink to this headline">¶</a></h2>
+<p>This module contains code for developer related logic of the system’s backend</p>
 </div>
 </div>
 

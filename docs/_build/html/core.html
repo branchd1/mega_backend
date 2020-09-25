@@ -55,6 +55,7 @@
 </div>
 <div class="section" id="module-core.admin">
 <span id="core-admin-module"></span><h2>core.admin module<a class="headerlink" href="#module-core.admin" title="Permalink to this headline">¶</a></h2>
+<p>This module is used to register models in the built in Django admin console</p>
 </div>
 <div class="section" id="module-core.apps">
 <span id="core-apps-module"></span><h2>core.apps module<a class="headerlink" href="#module-core.apps" title="Permalink to this headline">¶</a></h2>
@@ -77,7 +78,95 @@
 <dt id="core.models.Community">
 <em class="property">class </em><code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">Community</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Community" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
-<p>communities which organisations create</p>
+<p>Represents communities which are created by organisations</p>
+<dl class="py attribute">
+<dt id="core.models.Community.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#core.models.Community.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Community.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#core.models.Community.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of CommunityType representing the community’s type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#core.models.CommunityType" title="core.models.CommunityType">CommunityType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Community.picture">
+<code class="sig-name descname">picture</code><a class="headerlink" href="#core.models.Community.picture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image representing the community in UIs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Community.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#core.models.Community.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A detailed description of the the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Community.key">
+<code class="sig-name descname">key</code><a class="headerlink" href="#core.models.Community.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>A unique secret key used to gain access to the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Community.admins">
+<code class="sig-name descname">admins</code><a class="headerlink" href="#core.models.Community.admins" title="Permalink to this definition">¶</a></dt>
+<dd><p>The admins of the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Community.members">
+<code class="sig-name descname">members</code><a class="headerlink" href="#core.models.Community.members" title="Permalink to this definition">¶</a></dt>
+<dd><p>The members of the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Community.features">
+<code class="sig-name descname">features</code><a class="headerlink" href="#core.models.Community.features" title="Permalink to this definition">¶</a></dt>
+<dd><p>The features which the admins have added to the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py exception">
 <dt id="core.models.Community.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#core.models.Community.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -91,8 +180,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.admins">
-<code class="sig-name descname">admins</code><a class="headerlink" href="#core.models.Community.admins" title="Permalink to this definition">¶</a></dt>
+<dt id="id0">
+<code class="sig-name descname">admins</code><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related objects manager on the forward and reverse sides of
 a many-to-many relation.</p>
 <p>In the example:</p>
@@ -107,15 +196,15 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.description">
-<code class="sig-name descname">description</code><a class="headerlink" href="#core.models.Community.description" title="Permalink to this definition">¶</a></dt>
+<dt id="id1">
+<code class="sig-name descname">description</code><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.features">
-<code class="sig-name descname">features</code><a class="headerlink" href="#core.models.Community.features" title="Permalink to this definition">¶</a></dt>
+<dt id="id2">
+<code class="sig-name descname">features</code><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related objects manager on the forward and reverse sides of
 a many-to-many relation.</p>
 <p>In the example:</p>
@@ -131,13 +220,16 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 
 <dl class="py method">
 <dt id="core.models.Community.get_community_type_value">
-<code class="sig-name descname">get_community_type_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Community.get_community_type_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="core.models.Community.get_random_key">
-<code class="sig-name descname">get_random_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Community.get_random_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>generate a random key</p>
+<code class="sig-name descname">get_community_type_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#core.models.Community.get_community_type_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the community’s type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A string representing the communities type value</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -149,24 +241,48 @@ object the first time, the query is executed.</p>
 
 <dl class="py method">
 <dt id="core.models.Community.is_admin">
-<code class="sig-name descname">is_admin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Community.is_admin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">is_admin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span><span class="p">:</span> <span class="n">django.contrib.auth.models.User</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#core.models.Community.is_admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the parameter user is an admin of the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>object</em>) – A user that is being checked for admin membership in the community</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the user is an admin, False if the user is not an admin</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="core.models.Community.is_admin_or_member">
-<code class="sig-name descname">is_admin_or_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Community.is_admin_or_member" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">is_admin_or_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span><span class="p">:</span> <span class="n">django.contrib.auth.models.User</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#core.models.Community.is_admin_or_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the parameter user is a member or an admin of the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>object</em>) – A user that is being checked for membership in the community</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the user is a member or an admin, False if the user is neither a member or an admin</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.key">
-<code class="sig-name descname">key</code><a class="headerlink" href="#core.models.Community.key" title="Permalink to this definition">¶</a></dt>
+<dt id="id3">
+<code class="sig-name descname">key</code><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.members">
-<code class="sig-name descname">members</code><a class="headerlink" href="#core.models.Community.members" title="Permalink to this definition">¶</a></dt>
+<dt id="id4">
+<code class="sig-name descname">members</code><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related objects manager on the forward and reverse sides of
 a many-to-many relation.</p>
 <p>In the example:</p>
@@ -181,8 +297,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#core.models.Community.name" title="Permalink to this definition">¶</a></dt>
+<dt id="id5">
+<code class="sig-name descname">name</code><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -193,16 +309,20 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.picture">
-<code class="sig-name descname">picture</code><a class="headerlink" href="#core.models.Community.picture" title="Permalink to this definition">¶</a></dt>
+<dt id="id6">
+<code class="sig-name descname">picture</code><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
 <dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
 assigning the width/height to the width_field/height_field, if appropriate.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="core.models.Community.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Community.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>override the default save function</p>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.models.Community.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -221,8 +341,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Community.type">
-<code class="sig-name descname">type</code><a class="headerlink" href="#core.models.Community.type" title="Permalink to this definition">¶</a></dt>
+<dt id="id7">
+<code class="sig-name descname">type</code><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -244,7 +364,19 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt id="core.models.CommunityType">
 <em class="property">class </em><code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">CommunityType</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.CommunityType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
-<p>represents community types</p>
+<p>Represents community types.
+It is used in Community model to specify the type</p>
+<dl class="py attribute">
+<dt id="core.models.CommunityType.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#core.models.CommunityType.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human readable string that signifies the type of community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py exception">
 <dt id="core.models.CommunityType.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#core.models.CommunityType.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -285,8 +417,8 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.CommunityType.value">
-<code class="sig-name descname">value</code><a class="headerlink" href="#core.models.CommunityType.value" title="Permalink to this definition">¶</a></dt>
+<dt id="id8">
+<code class="sig-name descname">value</code><a class="headerlink" href="#id8" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -332,18 +464,18 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="id0">
-<code class="sig-name descname">ADMIN</code><em class="property"> = 'ADMN'</em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dt id="id9">
+<code class="sig-name descname">ADMIN</code><em class="property"> = 'ADMN'</em><a class="headerlink" href="#id9" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id1">
-<code class="sig-name descname">COMMUNITY</code><em class="property"> = 'PUBL'</em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dt id="id10">
+<code class="sig-name descname">COMMUNITY</code><em class="property"> = 'PUBL'</em><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id2">
-<code class="sig-name descname">USER</code><em class="property"> = 'USER'</em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dt id="id11">
+<code class="sig-name descname">USER</code><em class="property"> = 'USER'</em><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -352,7 +484,85 @@ object the first time, the query is executed.</p>
 <dt id="core.models.Feature">
 <em class="property">class </em><code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">Feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Feature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
-<p>features built by 3rd party developers</p>
+<p>Represents features built by 3rd party developers</p>
+<dl class="py attribute">
+<dt id="core.models.Feature.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#core.models.Feature.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Feature.picture">
+<code class="sig-name descname">picture</code><a class="headerlink" href="#core.models.Feature.picture" title="Permalink to this definition">¶</a></dt>
+<dd><p>The picture representing the feature in UIs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Feature.desription">
+<code class="sig-name descname">desription</code><a class="headerlink" href="#core.models.Feature.desription" title="Permalink to this definition">¶</a></dt>
+<dd><p>The description of the feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Feature.key">
+<code class="sig-name descname">key</code><a class="headerlink" href="#core.models.Feature.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>A unique secret key used by feature developers to access the feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Feature.payload">
+<code class="sig-name descname">payload</code><a class="headerlink" href="#core.models.Feature.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>The code that instructs the frontend what components to display</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Feature.User">
+<code class="sig-name descname">User</code><a class="headerlink" href="#core.models.Feature.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user who owns the feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.Feature.approved">
+<code class="sig-name descname">approved</code><a class="headerlink" href="#core.models.Feature.approved" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the feature has been accepted to be displayed on the frontend by the admin,
+False if rejected, and None otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py exception">
 <dt id="core.models.Feature.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#core.models.Feature.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -366,8 +576,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Feature.approved">
-<code class="sig-name descname">approved</code><a class="headerlink" href="#core.models.Feature.approved" title="Permalink to this definition">¶</a></dt>
+<dt id="id12">
+<code class="sig-name descname">approved</code><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -395,12 +605,6 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 object the first time, the query is executed.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="core.models.Feature.get_random_key">
-<code class="sig-name descname">get_random_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Feature.get_random_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>generate a random key</p>
-</dd></dl>
-
 <dl class="py attribute">
 <dt id="core.models.Feature.id">
 <code class="sig-name descname">id</code><a class="headerlink" href="#core.models.Feature.id" title="Permalink to this definition">¶</a></dt>
@@ -409,15 +613,15 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Feature.key">
-<code class="sig-name descname">key</code><a class="headerlink" href="#core.models.Feature.key" title="Permalink to this definition">¶</a></dt>
+<dt id="id13">
+<code class="sig-name descname">key</code><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Feature.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#core.models.Feature.name" title="Permalink to this definition">¶</a></dt>
+<dt id="id14">
+<code class="sig-name descname">name</code><a class="headerlink" href="#id14" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -428,23 +632,27 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Feature.payload">
-<code class="sig-name descname">payload</code><a class="headerlink" href="#core.models.Feature.payload" title="Permalink to this definition">¶</a></dt>
+<dt id="id15">
+<code class="sig-name descname">payload</code><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.Feature.picture">
-<code class="sig-name descname">picture</code><a class="headerlink" href="#core.models.Feature.picture" title="Permalink to this definition">¶</a></dt>
+<dt id="id16">
+<code class="sig-name descname">picture</code><a class="headerlink" href="#id16" title="Permalink to this definition">¶</a></dt>
 <dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
 assigning the width/height to the width_field/height_field, if appropriate.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="core.models.Feature.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.Feature.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>override the default save function</p>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.models.Feature.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -486,7 +694,84 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt id="core.models.SimpleStore">
 <em class="property">class </em><code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">SimpleStore</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.SimpleStore" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
-<p>simple data store for features</p>
+<p>Simple data store for features</p>
+<dl class="py attribute">
+<dt id="core.models.SimpleStore.feature">
+<code class="sig-name descname">feature</code><a class="headerlink" href="#core.models.SimpleStore.feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>The feature responsible for the stored data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#core.models.Feature" title="core.models.Feature">Feature</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.SimpleStore.key">
+<code class="sig-name descname">key</code><a class="headerlink" href="#core.models.SimpleStore.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>String used to retrieve value from the SimpleStore</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.SimpleStore.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#core.models.SimpleStore.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Json representing data stored in the data store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.SimpleStore.user">
+<code class="sig-name descname">user</code><a class="headerlink" href="#core.models.SimpleStore.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user who stored the data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>User</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.SimpleStore.community">
+<code class="sig-name descname">community</code><a class="headerlink" href="#core.models.SimpleStore.community" title="Permalink to this definition">¶</a></dt>
+<dd><p>The community the data is associated with</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#core.models.Community" title="core.models.Community">Community</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.SimpleStore.access">
+<code class="sig-name descname">access</code><a class="headerlink" href="#core.models.SimpleStore.access" title="Permalink to this definition">¶</a></dt>
+<dd><p>The access level of the SimpleStore</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>enumerate</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="core.models.SimpleStore.date">
+<code class="sig-name descname">date</code><a class="headerlink" href="#core.models.SimpleStore.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>The time the store was last updated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py exception">
 <dt id="core.models.SimpleStore.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#core.models.SimpleStore.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -500,15 +785,15 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.SimpleStore.access">
-<code class="sig-name descname">access</code><a class="headerlink" href="#core.models.SimpleStore.access" title="Permalink to this definition">¶</a></dt>
+<dt id="id17">
+<code class="sig-name descname">access</code><a class="headerlink" href="#id17" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.SimpleStore.community">
-<code class="sig-name descname">community</code><a class="headerlink" href="#core.models.SimpleStore.community" title="Permalink to this definition">¶</a></dt>
+<dt id="id18">
+<code class="sig-name descname">community</code><a class="headerlink" href="#id18" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -525,15 +810,15 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.SimpleStore.date">
-<code class="sig-name descname">date</code><a class="headerlink" href="#core.models.SimpleStore.date" title="Permalink to this definition">¶</a></dt>
+<dt id="id19">
+<code class="sig-name descname">date</code><a class="headerlink" href="#id19" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.SimpleStore.feature">
-<code class="sig-name descname">feature</code><a class="headerlink" href="#core.models.SimpleStore.feature" title="Permalink to this definition">¶</a></dt>
+<dt id="id20">
+<code class="sig-name descname">feature</code><a class="headerlink" href="#id20" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -572,8 +857,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.SimpleStore.key">
-<code class="sig-name descname">key</code><a class="headerlink" href="#core.models.SimpleStore.key" title="Permalink to this definition">¶</a></dt>
+<dt id="id21">
+<code class="sig-name descname">key</code><a class="headerlink" href="#id21" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -584,8 +869,8 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.SimpleStore.user">
-<code class="sig-name descname">user</code><a class="headerlink" href="#core.models.SimpleStore.user" title="Permalink to this definition">¶</a></dt>
+<dt id="id22">
+<code class="sig-name descname">user</code><a class="headerlink" href="#id22" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -602,8 +887,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.SimpleStore.value">
-<code class="sig-name descname">value</code><a class="headerlink" href="#core.models.SimpleStore.value" title="Permalink to this definition">¶</a></dt>
+<dt id="id23">
+<code class="sig-name descname">value</code><a class="headerlink" href="#id23" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -614,7 +899,18 @@ object the first time, the query is executed.</p>
 <dt id="core.models.UploadedImage">
 <em class="property">class </em><code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">UploadedImage</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.UploadedImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
-<p>stores uploaded images via features</p>
+<p>Stores images uploaded via features</p>
+<dl class="py attribute">
+<dt id="core.models.UploadedImage.image">
+<code class="sig-name descname">image</code><a class="headerlink" href="#core.models.UploadedImage.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The image stored</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py exception">
 <dt id="core.models.UploadedImage.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#core.models.UploadedImage.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -635,8 +931,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.models.UploadedImage.image">
-<code class="sig-name descname">image</code><a class="headerlink" href="#core.models.UploadedImage.image" title="Permalink to this definition">¶</a></dt>
+<dt id="id24">
+<code class="sig-name descname">image</code><a class="headerlink" href="#id24" title="Permalink to this definition">¶</a></dt>
 <dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
 assigning the width/height to the width_field/height_field, if appropriate.</p>
 </dd></dl>
@@ -648,9 +944,24 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 
 </dd></dl>
 
+<dl class="py function">
+<dt id="core.models.get_random_key">
+<code class="sig-prename descclassname">core.models.</code><code class="sig-name descname">get_random_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#core.models.get_random_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a unique 10 character key which a Feature object can use for its key attribute</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-core.permissions">
 <span id="core-permissions-module"></span><h2>core.permissions module<a class="headerlink" href="#module-core.permissions" title="Permalink to this headline">¶</a></h2>
+<p>This module contains permission logic for objects</p>
 <dl class="py class">
 <dt id="core.permissions.IsCommunityAdmin">
 <em class="property">class </em><code class="sig-prename descclassname">core.permissions.</code><code class="sig-name descname">IsCommunityAdmin</code><a class="headerlink" href="#core.permissions.IsCommunityAdmin" title="Permalink to this definition">¶</a></dt>
@@ -658,8 +969,24 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <p>Custom permission to allow only owners of an object to edit it.</p>
 <dl class="py method">
 <dt id="core.permissions.IsCommunityAdmin.has_object_permission">
-<code class="sig-name descname">has_object_permission</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">view</span></em>, <em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.permissions.IsCommunityAdmin.has_object_permission" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <cite>True</cite> if permission is granted, <cite>False</cite> otherwise.</p>
+<code class="sig-name descname">has_object_permission</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">view</span></em>, <em class="sig-param"><span class="n">obj</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#core.models.Community" title="core.models.Community">core.models.Community</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.permissions.IsCommunityAdmin.has_object_permission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write permissions are only allowed to the admins of the community</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – </p></li>
+<li><p><strong>view</strong> – </p></li>
+<li><p><strong>obj</strong> (<a class="reference internal" href="#core.models.Community" title="core.models.Community"><em>Community</em></a>) – The community being checked for permission</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if current user is an admin of obj Community,
+False if not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -672,7 +999,22 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dl class="py method">
 <dt id="core.permissions.IsOwner.has_object_permission">
 <code class="sig-name descname">has_object_permission</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">view</span></em>, <em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.permissions.IsOwner.has_object_permission" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <cite>True</cite> if permission is granted, <cite>False</cite> otherwise.</p>
+<dd><p>Write permissions are only allowed to the owner of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – </p></li>
+<li><p><strong>view</strong> – </p></li>
+<li><p><strong>obj</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if object user is the current user, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -680,11 +1022,13 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 </div>
 <div class="section" id="module-core.serializers">
 <span id="core-serializers-module"></span><h2>core.serializers module<a class="headerlink" href="#module-core.serializers" title="Permalink to this headline">¶</a></h2>
+<p>This module contains Serializer classes for models.
+These classes determine how model object should be serialized.</p>
 <dl class="py class">
 <dt id="core.serializers.CommunitySerializer">
 <em class="property">class </em><code class="sig-prename descclassname">core.serializers.</code><code class="sig-name descname">CommunitySerializer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.serializers.CommunitySerializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
-<p>Serialize community</p>
+<p>Serialize Community model</p>
 <dl class="py class">
 <dt id="core.serializers.CommunitySerializer.Meta">
 <em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#core.serializers.CommunitySerializer.Meta" title="Permalink to this definition">¶</a></dt>
@@ -713,7 +1057,7 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.serializers.CommunityTypeSerializer">
 <em class="property">class </em><code class="sig-prename descclassname">core.serializers.</code><code class="sig-name descname">CommunityTypeSerializer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.serializers.CommunityTypeSerializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
-<p>Serialize community type</p>
+<p>Serialize CommunityType model</p>
 <dl class="py class">
 <dt id="core.serializers.CommunityTypeSerializer.Meta">
 <em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#core.serializers.CommunityTypeSerializer.Meta" title="Permalink to this definition">¶</a></dt>
@@ -742,7 +1086,7 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.serializers.FeatureSerializer">
 <em class="property">class </em><code class="sig-prename descclassname">core.serializers.</code><code class="sig-name descname">FeatureSerializer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.serializers.FeatureSerializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
-<p>Serialize feature</p>
+<p>Serialize Feature model</p>
 <dl class="py class">
 <dt id="core.serializers.FeatureSerializer.Meta">
 <em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#core.serializers.FeatureSerializer.Meta" title="Permalink to this definition">¶</a></dt>
@@ -771,7 +1115,7 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.serializers.SimpleStoreSerializer">
 <em class="property">class </em><code class="sig-prename descclassname">core.serializers.</code><code class="sig-name descname">SimpleStoreSerializer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.serializers.SimpleStoreSerializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
-<p>Serialize simple store</p>
+<p>Serialize SimpleStore model</p>
 <dl class="py class">
 <dt id="core.serializers.SimpleStoreSerializer.Meta">
 <em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#core.serializers.SimpleStoreSerializer.Meta" title="Permalink to this definition">¶</a></dt>
@@ -799,17 +1143,250 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 </div>
 <div class="section" id="module-core.tests">
 <span id="core-tests-module"></span><h2>core.tests module<a class="headerlink" href="#module-core.tests" title="Permalink to this headline">¶</a></h2>
+<p>Tests for core logic</p>
+<dl class="py class">
+<dt id="core.tests.AddFeatureToCommunityTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">AddFeatureToCommunityTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.AddFeatureToCommunityTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test AddFeatureToCommunity API view</p>
+<dl class="py method">
+<dt id="core.tests.AddFeatureToCommunityTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.AddFeatureToCommunityTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.AddFeatureToCommunityTestCase.test_add_feature">
+<code class="sig-name descname">test_add_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.AddFeatureToCommunityTestCase.test_add_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that adding a feature to a community works smoothly</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.AddFeatureToCommunityTestCase.test_add_feature_errors">
+<code class="sig-name descname">test_add_feature_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.AddFeatureToCommunityTestCase.test_add_feature_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that adding a feature to a community errors properly</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.CheckEmailViewTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">CheckEmailViewTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.CheckEmailViewTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test CheckEmail API view</p>
+<dl class="py method">
+<dt id="core.tests.CheckEmailViewTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CheckEmailViewTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.CheckEmailViewTestCase.test_check_email">
+<code class="sig-name descname">test_check_email</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CheckEmailViewTestCase.test_check_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the view returns true if email exists in database and false otherwise</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.CommunityModelTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">CommunityModelTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.CommunityModelTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test Community Model</p>
+<dl class="py method">
+<dt id="core.tests.CommunityModelTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CommunityModelTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.CommunityModelTestCase.test_community_key_is_unique">
+<code class="sig-name descname">test_community_key_is_unique</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CommunityModelTestCase.test_community_key_is_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that community key is always unique</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.CommunityModelTestCase.test_get_community_type_value">
+<code class="sig-name descname">test_get_community_type_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CommunityModelTestCase.test_get_community_type_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that get_community_type_value function gets the accurate community type value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.CommunityModelTestCase.test_is_admin">
+<code class="sig-name descname">test_is_admin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CommunityModelTestCase.test_is_admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the is_admin function accurately detects whether a user is an admin</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.CommunityModelTestCase.test_is_admin_or_member">
+<code class="sig-name descname">test_is_admin_or_member</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CommunityModelTestCase.test_is_admin_or_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the is_admin_or_member function accurately detects whether a user is an admin or member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.CommunityViewTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">CommunityViewTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.CommunityViewTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test views related Community</p>
+<dl class="py method">
+<dt id="core.tests.CommunityViewTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CommunityViewTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.CommunityViewTestCase.test_community_perform_create">
+<code class="sig-name descname">test_community_perform_create</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.CommunityViewTestCase.test_community_perform_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the CommunityViewSet perform_create function works accurately</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.CommunityViewTestCase.test_community_queryset_is_accurate">
+<code class="sig-name descname">test_community_queryset_is_accurate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.CommunityViewTestCase.test_community_queryset_is_accurate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that communities returned by get_queryset method are correct</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.DataStoreTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">DataStoreTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.DataStoreTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test DataStore API view</p>
+<p class="rubric">Notes</p>
+<p>Implementation commented because it can only be tested with a Postgres database
+because the model uses a Postgres only field. It was tested manually. Due to Heroku
+free Postgres server limitation, the test database is SQLite.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.FeatureModelTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">FeatureModelTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.FeatureModelTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test Feature Model</p>
+<dl class="py method">
+<dt id="core.tests.FeatureModelTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.FeatureModelTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.FeatureModelTestCase.test_feature_key_is_unique">
+<code class="sig-name descname">test_feature_key_is_unique</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.FeatureModelTestCase.test_feature_key_is_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that feature keys are always unique</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.FeatureViewTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">FeatureViewTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.FeatureViewTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test views related Feature</p>
+<dl class="py method">
+<dt id="core.tests.FeatureViewTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.FeatureViewTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.FeatureViewTestCase.test_feature_queryset_is_accurate">
+<code class="sig-name descname">test_feature_queryset_is_accurate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.FeatureViewTestCase.test_feature_queryset_is_accurate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that features returned by get_queryset method are the correct features</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.JoinCommunityTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">JoinCommunityTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.JoinCommunityTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test JoinCommunity API view</p>
+<dl class="py method">
+<dt id="core.tests.JoinCommunityTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.JoinCommunityTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.JoinCommunityTestCase.test_join_community">
+<code class="sig-name descname">test_join_community</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.JoinCommunityTestCase.test_join_community" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that joining a community works smoothly</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.JoinCommunityTestCase.test_join_community_errors">
+<code class="sig-name descname">test_join_community_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.JoinCommunityTestCase.test_join_community_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that joining a community errors properly</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.LeaveCommunityTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">LeaveCommunityTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.LeaveCommunityTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test LeaveCommunity API view</p>
+<dl class="py method">
+<dt id="core.tests.LeaveCommunityTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.LeaveCommunityTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.LeaveCommunityTestCase.test_leave_community">
+<code class="sig-name descname">test_leave_community</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.LeaveCommunityTestCase.test_leave_community" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that leaving a community works smoothly</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.LeaveCommunityTestCase.test_leave_community_errors">
+<code class="sig-name descname">test_leave_community_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.LeaveCommunityTestCase.test_leave_community_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that leaving a community errors properly</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="core.tests.RemoveFeatureTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">core.tests.</code><code class="sig-name descname">RemoveFeatureTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.tests.RemoveFeatureTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Test RemoveFeature API view</p>
+<dl class="py method">
+<dt id="core.tests.RemoveFeatureTestCase.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.RemoveFeatureTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.RemoveFeatureTestCase.test_remove_feature">
+<code class="sig-name descname">test_remove_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.RemoveFeatureTestCase.test_remove_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that removing a feature from a community works smoothly</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="core.tests.RemoveFeatureTestCase.test_remove_feature_errors">
+<code class="sig-name descname">test_remove_feature_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#core.tests.RemoveFeatureTestCase.test_remove_feature_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that removing a feature from a community errors properly</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-core.urls">
 <span id="core-urls-module"></span><h2>core.urls module<a class="headerlink" href="#module-core.urls" title="Permalink to this headline">¶</a></h2>
+<p>This module specifies core URLs for the backend REST API and determines what views to match with them</p>
 </div>
 <div class="section" id="module-core.views">
 <span id="core-views-module"></span><h2>core.views module<a class="headerlink" href="#module-core.views" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the core views in the backend</p>
 <dl class="py class">
 <dt id="core.views.AddFeatureToCommunity">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">AddFeatureToCommunity</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.AddFeatureToCommunity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
-<p>add a feature to a community</p>
+<p>Add a feature to a community</p>
 <dl class="py method">
 <dt id="core.views.AddFeatureToCommunity.post">
 <code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.AddFeatureToCommunity.post" title="Permalink to this definition">¶</a></dt>
@@ -821,7 +1398,8 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.views.CheckEmail">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">CheckEmail</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.CheckEmail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
-<p>checks if an email exists</p>
+<p>Check Email View</p>
+<p>Checks if an email exists</p>
 <dl class="py method">
 <dt id="core.views.CheckEmail.post">
 <code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.CheckEmail.post" title="Permalink to this definition">¶</a></dt>
@@ -833,10 +1411,11 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.views.CommunityTypeViewSet">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">CommunityTypeViewSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.CommunityTypeViewSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ModelViewSet</span></code></p>
-<p>community type view set</p>
+<p>CommunityType view set</p>
+<p>Contains API views to perform CRUD operation on Community types</p>
 <dl class="py attribute">
 <dt id="core.views.CommunityTypeViewSet.queryset">
-<code class="sig-name descname">queryset</code><em class="property"> = &lt;QuerySet [&lt;CommunityType: estate&gt;, &lt;CommunityType: restaurant&gt;]&gt;</em><a class="headerlink" href="#core.views.CommunityTypeViewSet.queryset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">queryset</code><em class="property"> = &lt;QuerySet [&lt;CommunityType: restaurant&gt;]&gt;</em><a class="headerlink" href="#core.views.CommunityTypeViewSet.queryset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -851,11 +1430,20 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.views.CommunityViewSet">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">CommunityViewSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.CommunityViewSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ModelViewSet</span></code></p>
-<p>community view set</p>
+<p>Community view set</p>
+<p>Contains API views to perform CRUD operation on Communities</p>
 <dl class="py method">
 <dt id="core.views.CommunityViewSet.get_queryset">
 <code class="sig-name descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.views.CommunityViewSet.get_queryset" title="Permalink to this definition">¶</a></dt>
-<dd><p>return current user communities only</p>
+<dd><p>Get the list of items for this view.
+This must be an iterable, and may be a queryset.
+Defaults to using <cite>self.queryset</cite>.</p>
+<p>This method should always be used rather than accessing <cite>self.queryset</cite>
+directly, as <cite>self.queryset</cite> gets evaluated only once, and those results
+are cached for all subsequent requests.</p>
+<p>You may want to override this if you need to provide different
+querysets depending on the incoming request.</p>
+<p>(Eg. return a list of items that is specific to the user)</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -885,7 +1473,7 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.views.DataStore">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">DataStore</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.DataStore" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
-<p>stores data sent</p>
+<p>Data Store API views</p>
 <dl class="py method">
 <dt id="core.views.DataStore.get">
 <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.DataStore.get" title="Permalink to this definition">¶</a></dt>
@@ -899,13 +1487,13 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="core.views.DataStoreDelete">
-<em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">DataStoreDelete</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.DataStoreDelete" title="Permalink to this definition">¶</a></dt>
+<dt id="core.views.DataStoreDetails">
+<em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">DataStoreDetails</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.DataStoreDetails" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
-<p>delete data from store</p>
+<p>Data Store Details API views</p>
 <dl class="py method">
-<dt id="core.views.DataStoreDelete.delete">
-<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">store_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.DataStoreDelete.delete" title="Permalink to this definition">¶</a></dt>
+<dt id="core.views.DataStoreDetails.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">store_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.DataStoreDetails.delete" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -914,7 +1502,8 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dt id="core.views.FeatureViewSet">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">FeatureViewSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.FeatureViewSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ModelViewSet</span></code></p>
-<p>feature view set</p>
+<p>Feature view set</p>
+<p>Contains API views to perform CRUD operation on Features</p>
 <dl class="py method">
 <dt id="core.views.FeatureViewSet.get_queryset">
 <code class="sig-name descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.views.FeatureViewSet.get_queryset" title="Permalink to this definition">¶</a></dt>
@@ -930,11 +1519,6 @@ querysets depending on the incoming request.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="core.views.FeatureViewSet.permission_classes">
-<code class="sig-name descname">permission_classes</code><em class="property"> = []</em><a class="headerlink" href="#core.views.FeatureViewSet.permission_classes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt id="core.views.FeatureViewSet.serializer_class">
 <code class="sig-name descname">serializer_class</code><a class="headerlink" href="#core.views.FeatureViewSet.serializer_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#core.serializers.FeatureSerializer" title="core.serializers.FeatureSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.serializers.FeatureSerializer</span></code></a></p>
@@ -946,7 +1530,8 @@ querysets depending on the incoming request.</p>
 <dt id="core.views.JoinCommunity">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">JoinCommunity</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.JoinCommunity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
-<p>checks if an email exists</p>
+<p>Join Community View</p>
+<p>Join a community</p>
 <dl class="py method">
 <dt id="core.views.JoinCommunity.post">
 <code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.JoinCommunity.post" title="Permalink to this definition">¶</a></dt>
@@ -958,7 +1543,7 @@ querysets depending on the incoming request.</p>
 <dt id="core.views.LeaveCommunity">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">LeaveCommunity</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.LeaveCommunity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
-<p>leave a community</p>
+<p>Leave a community</p>
 <dl class="py method">
 <dt id="core.views.LeaveCommunity.post">
 <code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.LeaveCommunity.post" title="Permalink to this definition">¶</a></dt>
@@ -970,7 +1555,7 @@ querysets depending on the incoming request.</p>
 <dt id="core.views.RemoveFeature">
 <em class="property">class </em><code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">RemoveFeature</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.RemoveFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
-<p>remove feature from community</p>
+<p>Remove a feature from community</p>
 <dl class="py method">
 <dt id="core.views.RemoveFeature.post">
 <code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.RemoveFeature.post" title="Permalink to this definition">¶</a></dt>
@@ -998,11 +1583,27 @@ querysets depending on the incoming request.</p>
 <dl class="py function">
 <dt id="core.views.filter_stores_by_access">
 <code class="sig-prename descclassname">core.views.</code><code class="sig-name descname">filter_stores_by_access</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">store</span></em>, <em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.filter_stores_by_access" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if the current user has the appropriate permission to access the store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store</strong> (<a class="reference internal" href="#core.models.SimpleStore" title="core.models.SimpleStore"><em>SimpleStore</em></a>) – The store object</p></li>
+<li><p><strong>user</strong> (<em>User</em>) – The user who sent the request</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The store object if the user has the permission, None otherwise</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-core">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-core" title="Permalink to this headline">¶</a></h2>
+<p>This module contains code for core logic of the system’s backend</p>
 </div>
 </div>
 
