@@ -1,11 +1,12 @@
 import os
-from django.conf import settings
-from django.contrib.auth.models import User
-import django
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mega_backend.settings")
 
+import django
 django.setup()
+
+from django.conf import settings
+from django.contrib.auth.models import User
+from core.models import Feature, Community, CommunityType
 
 menu_feature = '{"admin":{"home":{"metadata":{"show_back_button":"false"},"components":[{"button":{"value":"manage ' \
                'items","action":{"action_type":"change_page","new_page":"manage_items"}}},{"grid":{"action":{' \
@@ -43,31 +44,47 @@ users = [
     }
 ]
 
+for user in users:
+    User.objects.create_user(username=user['email'], email=user['email'], password=user['password'],
+                             first_name=user['first_name'], last_name=user['last_name'])
+
 features = [
     {
-        'name': 'Menu',
+        'name': 'Menu Feature',
         'description': 'A menu feature to order food items in a restaurant community',
         'payload': menu_feature,
-        'user': users[0],
-        'picture': settings.STATIC_URL + 'core/img/pop_script/menu_feature.png'
+        'user': User.objects.get(username=users[0]['email']),
+        'picture': 'pop_script/menu_feature.png'
     }
 ]
 
-community_type = [
+for feature in features:
+    Feature.objects.create(name=feature['name'], description=feature['description'],
+                           payload=feature['payload'], user=feature['user'], picture=feature['picture'])
+
+community_types = [
     {
         'value': 'restaurant'
     },
 ]
 
-community = [
+for community_type in community_types:
+    CommunityType.objects.create(value=community_type['value'])
+
+communities = [
     {
         'name': 'Restaurant 54',
-        'type': community_type[0],
+        'type': CommunityType.objects.get(value=community_types[0]['value']),
         'description': 'This is the community MiniApp for the Restaurant 54 brand',
-        'picture': settings.STATIC_URL + 'core/img/pop_script/restaurant_logo.png'
+        'picture': 'pop_script/restaurant_logo.png'
     }
 ]
 
-for user in users:
-    User.objects.create_user(user)
+for community in communities:
+    community_object = Community.objects.create(name=community['name'], type=community['type'],
+                                                description=community['description'],
+                                                picture=community['picture'])
+    community_object.admins.add(User.objects.get(username=users[0]['email']))
+    community_object.members.add(User.objects.get(username=users[1]['email']))
+    community_object.features.add(Feature.objects.get(name=features[0]['name']))
 
