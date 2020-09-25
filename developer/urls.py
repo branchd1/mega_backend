@@ -14,4 +14,5 @@ urlpatterns = [
     path('add-feature/', views.add_feature, name='add_feature'),
     path('edit-feature/<int:feature_id>/', views.edit_feature, name='edit_feature'),
     path('feature-details/<int:feature_id>/', views.feature_details, name='feature_details'),
+    path('delete-feature/<int:feature_id>/', views.delete_feature, name='delete_feature'),
 ]

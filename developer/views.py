@@ -37,10 +37,24 @@ def index(request):
 
 @login_required
 def feature_details(request, feature_id):
-    """ feature details page """
+    """
+    Feature details page
+
+    Parameters
+    ----------
+    request
+    feature_id : int
+        The id of the feature
+
+    Returns
+    -------
+    object
+        Http response object
+
+    """
     try:
         _feature = Feature.objects.get(pk=feature_id)
-    except:
+    except Feature.DoesNotExist:
         return redirect('developer:index')
 
     ctx = {
@@ -52,7 +66,18 @@ def feature_details(request, feature_id):
 
 @login_required
 def add_feature(request):
-    """ Add feature """
+    """
+    Add feature
+
+    Parameters
+    ----------
+    request
+
+    Returns
+    -------
+    object
+        Http response object
+    """
     _feature_form = None
 
     if request.method == 'POST':
@@ -75,10 +100,23 @@ def add_feature(request):
 
 @login_required
 def edit_feature(request, feature_id):
-    """ edit feature """
+    """
+    Edit feature
+
+    Parameters
+    ----------
+    request
+    feature_id : int
+        The id of the feature
+
+    Returns
+    -------
+    object
+        Http response object
+    """
     try:
         _feature = Feature.objects.get(pk=feature_id)
-    except:
+    except Feature.DoesNotExist:
         return redirect('developer:index')
 
     _feature_form = None
@@ -97,3 +135,31 @@ def edit_feature(request, feature_id):
     }
 
     return render(request, 'developer/edit_feature.html', ctx)
+
+
+@login_required
+def delete_feature(request, feature_id):
+    """
+    Delete feature
+
+    Parameters
+    ----------
+    request
+    feature_id : int
+        The id of the feature
+
+    Returns
+    -------
+    object
+        Http response object
+    """
+
+    try:
+        _feature = Feature.objects.get(pk=feature_id)
+    except Feature.DoesNotExist:
+        return redirect('developer:index')
+
+    if request.method == 'POST':
+        _feature.delete()
+        return redirect(reverse('developer:index'))
+    return redirect(reverse('developer:feature_details', kwargs={'feature_id': _feature.id}))
