@@ -1,5 +1,11 @@
+import os
 from django.conf import settings
 from django.contrib.auth.models import User
+import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mega_backend.settings")
+
+django.setup()
 
 menu_feature = '{"admin":{"home":{"metadata":{"show_back_button":"false"},"components":[{"button":{"value":"manage ' \
                'items","action":{"action_type":"change_page","new_page":"manage_items"}}},{"grid":{"action":{' \
