@@ -16,6 +16,6 @@ urlpatterns = [
     path('features/add-to-community/', views.AddFeatureToCommunity.as_view(), name='add_feature_to_community'),
     path('features/remove/', views.RemoveFeature.as_view(), name='remove_feature'),
     path('data-store/', views.DataStore.as_view(), name='data_store'),
-    path('data-store/delete/<int:store_id>/', views.DataStore.delete, name='data_store_delete'),
+    path('data-store/delete/<int:store_id>/', views.DataStoreDetails.as_view(), name='data_store_delete'),
     path('upload-img/', views.UploadImage.as_view(), name='upload_img'),
 ]

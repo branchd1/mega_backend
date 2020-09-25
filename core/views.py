@@ -381,6 +381,9 @@ class DataStore(views.APIView):
 
         return Response({}, status=201)
 
+
+class DataStoreDetails(views.APIView):
+    """ Data Store Details API views """
     def delete(self, request, store_id):
         _no_access_response_dict = {
             'access': 'User does not have access to delete'
